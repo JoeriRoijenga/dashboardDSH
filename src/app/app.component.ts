@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
-  title = 'dashboardDSH';
 
   constructor(public router: Router) {
   }

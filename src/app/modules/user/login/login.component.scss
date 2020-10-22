@@ -1,7 +1,5 @@
 .login-center {
-  display: flex;
-  justify-content: center;
-  margin-top: 15%;
+  text-align: center;
 }
 
 .login-form {
@@ -10,7 +8,7 @@
   border: solid black 3px;
   padding: 10px 40px 30px 40px;
   width: 20%;
-  background-color: #ee7f00;
+  background-color: #459cdd;
 }
 
 input {
@@ -29,7 +27,16 @@ input {
   background-color: lightgrey;
   border: solid grey;
   &:hover {
-    background-color: grey;
+    background: darken(lightgrey, 10%);
     cursor: grab;
   }
+}
+
+.login-img {
+  text-align: center;
+  width: 25%;
+}
+
+.container {
+  margin-top: 10%;
 }
