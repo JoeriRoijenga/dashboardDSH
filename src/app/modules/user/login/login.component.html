@@ -1,11 +1,14 @@
 <div class="container">
   <div class="login-center">
     <img class="login-img" src="./../../../../assets/images/logo.png"><br>
-    <div class="login-form">
+    <form class="login-form" [formGroup]="loginForm" (submit)="onSubmit()">
       <h1>Login</h1>
-      <input type="text" id="username" placeholder="Username" />
-      <input type="password" id="password" placeholder="Password"/>
-      <button #submit class="login-submit">Login</button>
-    </div>
+      <input type="text" placeholder="Username" formControlName="username" autocomplete="off" />
+      <input type="password" placeholder="Password" formControlName="password" />
+      <button class="login-submit" [disabled]="loginForm.invalid">Login</button>
+      <div *ngIf="invalidLogin" style="color: white; font-weight: bold;">
+          <span>Invalid username or password!</span>
+      </div>
+    </form>
   </div>
 </div>
