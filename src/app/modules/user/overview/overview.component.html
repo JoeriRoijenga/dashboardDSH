@@ -1,0 +1,19 @@
+<h1>{{title}}</h1>
+
+<!--<input type="text" #newUser/>-->
+<!--<button>Add new user </button>-->
+<div class="userTable">
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>admin rights</th>
+      </tr>
+      <tr *ngFor="let user of users">
+        <td>{{user.name}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.adminrights ? '&#10003;' : '&#10005;'}}</td>
+      </tr>
+  </table>
+</div>
+
