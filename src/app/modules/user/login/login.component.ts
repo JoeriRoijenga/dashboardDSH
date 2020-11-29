@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
-import { UserService } from '../../../services/user.service';
+import { FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,14 +12,13 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router,
-    private userService: UserService
+    private authService: AuthService
   ) {
     this.invalidLogin = false;
   }
 
   loginForm = this.formBuilder.group({
-    username: ['', Validators.compose([Validators.required])],
+    mail: ['', Validators.compose([Validators.required])],
     password: ['', Validators.required]
   });
 
@@ -29,18 +27,26 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    // console.log(this.loginForm.value);
-
     if (this.loginForm.invalid) {
       return;
     }
 
-    const data = {
-      username: this.loginForm.controls.username.value,
-      password: this.loginForm.controls.password.value,
+    const userData = {
+      mail: this.loginForm.controls.mail.value,
+      pwd: this.loginForm.controls.password.value,
     };
 
-    console.log(data);
+    this.authService.login(userData)
+      .subscribe(
+      response => {
+        console.log('result:');
+        console.log(response);
+      },
+      error => {
+        console.log('error:');
+        console.log(error.error);
+      }
+    );
 
     this.invalidLogin = true;
   }

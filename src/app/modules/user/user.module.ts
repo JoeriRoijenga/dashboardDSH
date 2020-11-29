@@ -7,7 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [LoginComponent],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ]
 })
 export class UserModule { }
