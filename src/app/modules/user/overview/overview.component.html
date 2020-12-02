@@ -2,7 +2,7 @@
 
 <!--<input type="text" #newUser/>-->
 <!--<button>Add new user </button>-->
-<div class="userTable">
+<div class="userTable" id="table">
     <table>
       <tr>
         <th>Name</th>
@@ -16,4 +16,11 @@
       </tr>
   </table>
 </div>
+
+<div id="buttons">
+  <button class="button" (click)="openAddUser()"> add user</button>
+</div>
+
+
+
 
