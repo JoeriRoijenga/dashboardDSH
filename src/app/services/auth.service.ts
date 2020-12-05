@@ -14,11 +14,19 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  public create_user(): Observable<any> {
-    return this.http.post(environment.urlAPI + '/user/create', {user: this.testUser});
+  public create_user(userData: {}): Observable<any> {
+    return this.http.post(environment.urlAPI + '/user/create', {user: userData});
   }
 
   public login(userData: {}): Observable<any> {
     return this.http.post(environment.urlAPI + '/user/login', {user: userData});
+  }
+
+  public getUsers(): Observable<any> {
+    return this.http.get(environment.urlAPI + '/users/get/all');
+  }
+
+  public getUser(id: number): Observable<any> {
+    return this.http.get(environment.urlAPI + `/users/get/${id}`);
   }
 }

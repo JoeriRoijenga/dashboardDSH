@@ -36,17 +36,29 @@ export class LoginComponent implements OnInit {
       pwd: this.loginForm.controls.password.value,
     };
 
-    this.authService.login(userData)
+    // this.authService.login(userData)
+    //   .subscribe(
+    //   response => {
+    //     console.log('result:');
+    //     console.log(response);
+    //   },
+    //   error => {
+    //     console.log('error:');
+    //     console.log(error.error);
+    //   }
+    // );
+
+    this.authService.getUser(33)
       .subscribe(
-      response => {
-        console.log('result:');
-        console.log(response);
-      },
-      error => {
-        console.log('error:');
-        console.log(error.error);
-      }
-    );
+        response => {
+          console.log('result:');
+          console.log(response);
+        },
+        error => {
+          console.log('error:');
+          console.log(error.error);
+        }
+      );
 
     this.invalidLogin = true;
   }

@@ -2,6 +2,7 @@ import { Component, OnInit, Inject} from '@angular/core';
 
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig} from '@angular/material/dialog';
 import {DialogComponent} from './dialog/dialog.component';
+import { AuthService } from '../../../services/auth.service';
 
 // let dialogRef = dialog.open(UserprofileComponent, {height:'400px', width: '600px'});
 
@@ -49,7 +50,22 @@ export class OverviewComponent implements OnInit {
 
 
 
-  constructor(private dialog: MatDialog) { }
+  constructor(
+    private dialog: MatDialog,
+    private authService: AuthService
+  ) {
+    this.authService.getUsers()
+      .subscribe(
+        response => {
+          console.log('result:');
+          console.log(response);
+        },
+        error => {
+          console.log('error:');
+          console.log(error.error);
+        }
+      );
+  }
 
   openAddUser(): void{
     const dialogConfig = new MatDialogConfig();
