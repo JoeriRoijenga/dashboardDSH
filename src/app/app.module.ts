@@ -5,9 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SectionsModule } from './modules/sections/sections.module';
 import { UserModule } from './modules/user/user.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
+import { NotLoggedInGuard } from './services/guards/NotLoggedIn.guard';
+import { LoggedInGuard } from './services/guards/LoggedIn.guard';
+import { HttpRequestInterceptor } from './services/interceptors/HttpRequest.interceptor';
 
 @NgModule({
   declarations: [
@@ -21,9 +24,17 @@ import { MatDialogModule } from '@angular/material/dialog';
         HttpClientModule,
         SectionsModule,
         BrowserAnimationsModule,
-        MatDialogModule
+        MatDialogModule,
     ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpRequestInterceptor,
+      multi: true
+    },
+    LoggedInGuard,
+    NotLoggedInGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

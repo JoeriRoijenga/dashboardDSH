@@ -2,24 +2,40 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { tap } from 'rxjs/operators';
+
+class LoginResponse {
+  accessToken: string;
+  // refreshToken: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
-  private testUser = {
-      name: 'test',
-      pwd: 'test2',
-      mail: 'test@test1.com'
-    };
+
+  public static readonly ACCESS_TOKEN = "access_token";
 
   constructor(private http: HttpClient) { }
 
-  public create_user(userData: {}): Observable<any> {
-    return this.http.post(environment.urlAPI + '/user/create', {user: userData});
+  public create_user(name: string, pwd: string, mail: string): Observable<any> {
+    return this.http.post(environment.urlAPI + '/user/create', {name: name, pwd: pwd, mail: mail});
   }
 
-  public login(userData: {}): Observable<any> {
-    return this.http.post(environment.urlAPI + '/user/login', {user: userData});
+  public login(mail: string, pwd: string) {
+    return this.http.post<any>(environment.urlAPI + '/user/login', {mail: mail, pwd: pwd}).pipe(tap(response => {
+      localStorage.setItem('access_token', response.accessToken)
+    }));
+  }
+
+  public logout() {
+    localStorage.removeItem('access_token');
+  }
+
+  public isLoggedIn(): boolean {
+    console.log(localStorage.getItem('access_token') !==  null);
+    return localStorage.getItem('access_token') !==  null;
   }
 
   public getUsers(): Observable<any> {
