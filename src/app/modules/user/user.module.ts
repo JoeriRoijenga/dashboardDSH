@@ -8,9 +8,10 @@ import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
-  declarations: [LoginComponent, OverviewComponent, DialogComponent],
+  declarations: [LoginComponent, OverviewComponent, DialogComponent, LogoutComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

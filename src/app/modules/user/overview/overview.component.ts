@@ -57,12 +57,12 @@ export class OverviewComponent implements OnInit {
     this.authService.getUsers()
       .subscribe(
         response => {
-          console.log('result:');
-          console.log(response);
+          // console.log('result:');
+          // console.log(response);
         },
         error => {
-          console.log('error:');
-          console.log(error.error);
+          // console.log('error:');
+          // console.log(error.error);
         }
       );
   }

@@ -14,7 +14,6 @@ export class HttpRequestInterceptor implements HttpInterceptor {
   constructor() {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    console.log("intercept");
     const token = JSON.parse(localStorage.getItem(AuthService.ACCESS_TOKEN));
     if (token) {
       request = request.clone({

@@ -11,12 +11,10 @@ export class NotLoggedInGuard implements CanActivate {
 
   canActivate(): boolean | UrlTree {
     if (this.authService.isLoggedIn()) {
-      console.log("(NotLoggedInGuard) logged in");
       return this.router.parseUrl("/overview")
     }
 
-    console.log("(NotLoggedInGuard) not logged in");
-    return true;
+    return !this.authService.isLoggedIn();
   }
 
 }

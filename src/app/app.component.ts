@@ -7,10 +7,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
-  test: string;
-  constructor(public router: Router) {
-    this.test = '0';
-  }
+
+  constructor(public router: Router) {}
 
   ngOnInit(): void {}
 }

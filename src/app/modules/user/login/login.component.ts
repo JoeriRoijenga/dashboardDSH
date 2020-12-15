@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { log } from 'util';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router,
   ) {
     this.invalidLogin = false;
   }
@@ -27,40 +29,15 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     if (this.loginForm.invalid) {
+      this.invalidLogin = true;
       return;
     }
 
     this.authService.login(this.loginForm.controls.mail.value, this.loginForm.controls.password.value)
-      .subscribe(
-  response => {
+      .subscribe(response => {
         console.log(response);
-      }
-    );
-    // this.authService.login(this.loginForm.controls.mail.value, this.loginForm.controls.password.value)
-    //   .subscribe(
-    //   response => {
-    //     console.log('result:');
-    //     console.log(response);
-    //   },
-    //   error => {
-    //     console.log('error:');
-    //     console.log(error.error);
-    //   }
-    // );
-
-    // this.authService.getUser(33)
-    //   .subscribe(
-    //     response => {
-    //       console.log('result:');
-    //       console.log(response);
-    //     },
-    //     error => {
-    //       console.log('error:');
-    //       console.log(error.error);
-    //     }
-    //   );
-
-    this.invalidLogin = true;
+        this.router.navigateByUrl("/overview").then(r => {});
+      });
   }
 
 }

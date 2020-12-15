@@ -17,14 +17,16 @@ export class AuthService {
 
   public static readonly ACCESS_TOKEN = "access_token";
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
   public create_user(name: string, pwd: string, mail: string): Observable<any> {
-    return this.http.post(environment.urlAPI + '/user/create', {name: name, pwd: pwd, mail: mail});
+    return this.http.post(environment.urlAPI + '/users/create', {name: name, pwd: pwd, mail: mail});
   }
 
   public login(mail: string, pwd: string) {
-    return this.http.post<any>(environment.urlAPI + '/user/login', {mail: mail, pwd: pwd}).pipe(tap(response => {
+    return this.http.post<any>(environment.urlAPI + '/users/login', {mail: mail, pwd: pwd}).pipe(tap(response => {
       localStorage.setItem('access_token', response.accessToken)
     }));
   }
@@ -34,7 +36,6 @@ export class AuthService {
   }
 
   public isLoggedIn(): boolean {
-    console.log(localStorage.getItem('access_token') !==  null);
     return localStorage.getItem('access_token') !==  null;
   }
 
