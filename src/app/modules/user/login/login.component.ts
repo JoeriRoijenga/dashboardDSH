@@ -30,14 +30,17 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     if (this.loginForm.invalid) {
       this.invalidLogin = true;
-      return;
     }
 
-    this.authService.login(this.loginForm.controls.mail.value, this.loginForm.controls.password.value)
-      .subscribe(response => {
-        console.log(response);
-        this.router.navigateByUrl("/overview").then(r => {});
-      });
+    this.authService.login(this.loginForm.controls.mail.value, this.loginForm.controls.password.value).subscribe(
+      response => {
+        if (response) {
+          console.log("login success");
+          this.router.navigateByUrl('/overview').then();
+        }
+        this.invalidLogin = true;
+      }
+    );
   }
 
 }
