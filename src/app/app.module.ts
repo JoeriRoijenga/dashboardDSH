@@ -11,6 +11,16 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { NotLoggedInGuard } from './services/guards/NotLoggedIn.guard';
 import { LoggedInGuard } from './services/guards/LoggedIn.guard';
 import { HttpRequestInterceptor } from './services/interceptors/HttpRequest.interceptor';
+import { JwtModule } from "@auth0/angular-jwt";
+import { AuthService } from './services/auth.service';
+
+export function getToken() {
+  if (localStorage.getItem(AuthService.ACCESS_TOKEN) ==  null && localStorage.getItem(AuthService.REFRESH_TOKEN) !== null) {
+    return localStorage.getItem(AuthService.REFRESH_TOKEN);
+  }
+
+  return localStorage.getItem(AuthService.ACCESS_TOKEN);
+}
 
 @NgModule({
   declarations: [
@@ -25,13 +35,14 @@ import { HttpRequestInterceptor } from './services/interceptors/HttpRequest.inte
         SectionsModule,
         BrowserAnimationsModule,
         MatDialogModule,
+        JwtModule.forRoot({
+          config: {
+            tokenGetter: getToken,
+            allowedDomains: ['localhost:5000']//,
+          }
+        })
     ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttpRequestInterceptor,
-      multi: true
-    },
     LoggedInGuard,
     NotLoggedInGuard
   ],
