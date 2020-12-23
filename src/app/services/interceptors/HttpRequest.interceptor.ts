@@ -24,14 +24,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
   ) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    var tokenType = null;
-    if (request.url === (`${environment.urlAPI}/users/refresh`)) {
-      tokenType = AuthService.REFRESH_TOKEN;
-    } else {
-      tokenType = AuthService.ACCESS_TOKEN;
-    }
-
-    const token = localStorage.getItem(tokenType);
+    const token = localStorage.getItem(request.url === (`${environment.urlAPI}/users/refresh`) ? AuthService.REFRESH_TOKEN : AuthService.ACCESS_TOKEN);
 
     if (token) {
       request = this.addToken(request, token);
@@ -51,14 +44,11 @@ export class HttpRequestInterceptor implements HttpInterceptor {
   private handleError(request: HttpRequest<any>, next: HttpHandler) {
     return this.authService.refreshToken().pipe(
       switchMap((response) => {
-        console.log(request);
         return next.handle(this.addToken(request, response.access_token));
     }));
   }
 
   private addToken(request: HttpRequest<any>, token: string,) {
-    console.log("handle new request");
-
     return request.clone({
       setHeaders: {
         Authorization: `Bearer ${token}`
