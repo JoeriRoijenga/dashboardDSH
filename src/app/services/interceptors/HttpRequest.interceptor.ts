@@ -7,49 +7,62 @@ import {
   HttpErrorResponse
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, switchMap } from 'rxjs/operators';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
+
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
 
+  errorlist = [401, 422];
+
   constructor(
     private authService: AuthService,
-    private router: Router
-    ) {}
+    private router: Router,
+  ) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const token = JSON.parse(localStorage.getItem(AuthService.ACCESS_TOKEN));
-    if (token) {
-      console.log("Intercept");
+    var tokenType = null;
+    if (request.url === (`${environment.urlAPI}/users/refresh`)) {
+      tokenType = AuthService.REFRESH_TOKEN;
+    } else {
+      tokenType = AuthService.ACCESS_TOKEN;
+    }
 
-      request = request.clone({
-        setHeaders: {
-          Authorization: `Bearer ${token}`
-        }
-      });
+    const token = localStorage.getItem(tokenType);
+
+    if (token) {
+      request = this.addToken(request, token);
     }
 
     return next.handle(request).pipe(
-      catchError(error => {
-        if (localStorage.getItem(AuthService.ACCESS_TOKEN) != null && error.status === 401) {
-          this.authService.refreshToken().subscribe((response) => {
-            response => {
-              console.log("saving...");
-
-              this.authService.saveAccessToken(response.access_token);
-            }
-          },
-          () => {
-            this.authService.logout();
-            this.router.parseUrl("/login");
-          }
-          );
+      catchError((error) => {
+        if (localStorage.getItem(AuthService.REFRESH_TOKEN) != null && this.errorlist.find(code => code == error.status)) {
+          return this.handleError(request, next);
         }
 
         return throwError(error)
       }
     ));
+  }
+
+  private handleError(request: HttpRequest<any>, next: HttpHandler) {
+    return this.authService.refreshToken().pipe(
+      switchMap((response) => {
+        console.log(request);
+        return next.handle(this.addToken(request, response.access_token));
+    }));
+  }
+
+  private addToken(request: HttpRequest<any>, token: string,) {
+    console.log("handle new request");
+
+    return request.clone({
+      setHeaders: {
+        Authorization: `Bearer ${token}`
+      }
+    });
   }
 }

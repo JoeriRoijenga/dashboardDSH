@@ -4,7 +4,6 @@ import { Observable, of, pipe, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { catchError, mapTo, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { JwtHelperService } from "@auth0/angular-jwt";
 
 class LoginResponse {
   accessToken: string;
@@ -23,7 +22,6 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private jwtHelper: JwtHelperService
   ) { }
 
   public create_user(name: string, pwd: string, mail: string): Observable<boolean> {
@@ -39,8 +37,6 @@ export class AuthService {
   public login(mail: string, pwd: string): Observable<boolean> {
     return this.http.post<any>(`${environment.urlAPI}/users/login`, {mail: mail, pwd: pwd}).pipe(
       tap(response => {
-        console.log(response);
-
         this.saveTokens(response.tokens);
       }),
       mapTo(true),
@@ -61,8 +57,11 @@ export class AuthService {
     localStorage.setItem(AuthService.ACCESS_TOKEN, token)
   }
 
-  public refreshToken() {
-    return this.http.post<any>(`${environment.urlAPI}/users/refresh`, {});
+  public refreshToken(): Observable<any> {
+    return this.http.post<any>(`${environment.urlAPI}/users/refresh`, {}).pipe(
+      tap((response) => {
+        this.saveAccessToken(response.access_token);
+    }));
   }
 
   private static getRefreshToken(): string {
@@ -75,16 +74,7 @@ export class AuthService {
   }
 
   public isLoggedIn(): boolean {
-    if (localStorage.getItem(AuthService.ACCESS_TOKEN) ==  null && localStorage.getItem(AuthService.REFRESH_TOKEN) !== null) {
-      this.refreshToken().subscribe(response => {
-        this.saveAccessToken(response.access_token);
-        return true
-      });
-    } else if (localStorage.getItem(AuthService.ACCESS_TOKEN) ==  null) {
-      return false
-    }
-
-    return !this.tokenExpired(AuthService.ACCESS_TOKEN);
+    return !this.tokenExpired(localStorage.getItem(AuthService.REFRESH_TOKEN));
   }
 
   public getUsers(): Observable<any> {
@@ -95,7 +85,23 @@ export class AuthService {
     return this.http.get(`${environment.urlAPI}/users/get/${id}`);
   }
 
-  private tokenExpired(token){
-    return this.jwtHelper.isTokenExpired(localStorage.getItem(token));
+  public accessTokenValid(token: string): boolean {
+    if ((token === null && localStorage.getItem(AuthService.REFRESH_TOKEN) !== null)) {
+      return false;
+    } else if (token !==  null) {
+      return token.split(".").length === 3;
+    }
+
+    return true;
+  }
+
+  public tokenExpired(token: string){
+    if (token !== null) {
+      const jwtToken = JSON.parse(atob(token.split('.')[1]));
+      const tokenExpired = Date.now() > (jwtToken.exp * 1000);
+
+      return tokenExpired;
+    }
+    return true;
   }
 }
