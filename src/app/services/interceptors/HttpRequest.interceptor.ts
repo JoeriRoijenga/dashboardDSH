@@ -24,7 +24,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
   ) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const token = localStorage.getItem(request.url === (`${environment.urlAPI}/users/refresh`) ? AuthService.REFRESH_TOKEN : AuthService.ACCESS_TOKEN);
+    const token = request.url === (`${environment.urlAPI}/users/refresh`) ? this.authService.getRefreshToken() : this.authService.getAccessToken()
 
     if (token) {
       request = this.addToken(request, token);
@@ -32,7 +32,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
 
     return next.handle(request).pipe(
       catchError((error) => {
-        if (localStorage.getItem(AuthService.REFRESH_TOKEN) != null && this.errorlist.find(code => code == error.status)) {
+        if (this.authService.getRefreshToken() != null && this.errorlist.find(code => code == error.status)) {
           return this.handleError(request, next);
         }
 
