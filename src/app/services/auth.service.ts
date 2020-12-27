@@ -51,7 +51,7 @@ export class AuthService {
 
     return this.http.post<any>(`${environment.urlAPI}/users/logout`, body).pipe(
       tap(() => {
-        this.removeTokens()
+        this.removeTokens(false)
       },
       catchError((error) => {
         console.log(error.message);
@@ -91,10 +91,12 @@ export class AuthService {
   }
 
   public removeTokens(reload = true): void {
+    console.log("remove tokens");
+
     localStorage.removeItem(this.ACCESS_TOKEN);
     localStorage.removeItem(this.REFRESH_TOKEN);
     if (reload) {
-      this.router.navigateByUrl(this.router.url).then()
+      this.router.navigate([this.router.url]);
     }
   }
 
