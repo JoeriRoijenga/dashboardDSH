@@ -11,6 +11,7 @@ export class LoggedInGuard implements CanActivate {
 
   canActivate(): boolean | UrlTree {
     if (!this.authService.isLoggedIn()) {
+      this.authService.removeTokens(false);
       return this.router.parseUrl("/login");
     }
 

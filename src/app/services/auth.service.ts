@@ -5,10 +5,6 @@ import { environment } from '../../environments/environment';
 import { catchError, mapTo, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
-class LoginResponse {
-  accessToken: string;
-  // refreshToken: string;
-}
 
 @Injectable({
   providedIn: 'root'
@@ -41,25 +37,35 @@ export class AuthService {
       }),
       mapTo(true),
       catchError(error => {
-        console.log("error!");
         console.log(error.error);
         return of(false);
       })
     );
   }
 
-  public saveTokens(tokens): void {
-    localStorage.setItem(this.ACCESS_TOKEN, tokens.access_token);
-    localStorage.setItem(this.REFRESH_TOKEN, tokens.refresh_token);
+  public logout(): Observable<any> {
+    var body = {}
+    if (this.getRefreshToken() != null) {
+      body = {"token": this.getRefreshToken()}
+    }
+
+    return this.http.post<any>(`${environment.urlAPI}/users/logout`, body).pipe(
+      tap(() => {
+        this.removeTokens()
+      },
+      catchError((error) => {
+        console.log(error.message);
+        return error;
+      })
+    ));
   }
 
-  public saveAccessToken(token): void {
-    localStorage.setItem(this.ACCESS_TOKEN, token)
-  }
+  public isLoggedIn(): boolean {
+    if (this.getRefreshToken() != null) {
+      return true;
+    }
 
-  public removeTokens(): void {
-    localStorage.removeItem(this.ACCESS_TOKEN);
-    localStorage.removeItem(this.REFRESH_TOKEN);
+    return false;
   }
 
   public refreshToken(): Observable<any> {
@@ -75,49 +81,37 @@ export class AuthService {
     ));
   }
 
-  public getRefreshToken(): string {
-    return localStorage.getItem(this.REFRESH_TOKEN);
+  public saveTokens(tokens): void {
+    localStorage.setItem(this.ACCESS_TOKEN, tokens.access_token);
+    localStorage.setItem(this.REFRESH_TOKEN, tokens.refresh_token);
+  }
+
+  public saveAccessToken(token): void {
+    localStorage.setItem(this.ACCESS_TOKEN, token)
+  }
+
+  public removeTokens(reload = true): void {
+    localStorage.removeItem(this.ACCESS_TOKEN);
+    localStorage.removeItem(this.REFRESH_TOKEN);
+    if (reload) {
+      this.router.navigateByUrl(this.router.url).then()
+    }
   }
 
   public getAccessToken(): string {
     return localStorage.getItem(this.ACCESS_TOKEN);
   }
 
-  public logout(): Observable<any> {
-    var body = {}
-    if (this.tokenValid(this.getRefreshToken())) {
-      body = {"token": this.getRefreshToken()}
+  public getRefreshToken(): string {
+    var token = localStorage.getItem(this.REFRESH_TOKEN);
+    if (token != null) {
+      if (!this.tokenValid(token) || this.tokenExpired(token)) {
+        this.removeTokens();
+        return null;
+      }
     }
 
-    return this.http.post<any>(`${environment.urlAPI}/users/logout`, body).pipe(
-      tap(() => {
-        this.removeTokens()
-        this.router.navigateByUrl("/login").then(); // Promise ignored
-      },
-      catchError((error) => {
-        console.log(error.message);
-        return error;
-      })
-    ));
-  }
-
-  public isLoggedIn(): boolean {
-    if (!this.tokenExpired(this.getRefreshToken())) {
-      return true;
-    }
-
-    if (this.getRefreshToken === null) {
-      this.logout().subscribe();
-    }
-    return false;
-  }
-
-  public getUsers(): Observable<any> {
-    return this.http.get(`${environment.urlAPI}/users/get/all`);
-  }
-
-  public getUser(id: number): Observable<any> {
-    return this.http.get(`${environment.urlAPI}/users/get/${id}`);
+    return token;
   }
 
   public tokenValid(token: string): boolean {
@@ -138,5 +132,13 @@ export class AuthService {
       return tokenExpired;
     }
     return true;
+  }
+
+  public getUsers(): Observable<any> {
+    return this.http.get(`${environment.urlAPI}/users/get/all`);
+  }
+
+  public getUser(id: number): Observable<any> {
+    return this.http.get(`${environment.urlAPI}/users/get/${id}`);
   }
 }
