@@ -91,10 +91,9 @@ export class AuthService {
   }
 
   public removeTokens(reload = true): void {
-    console.log("remove tokens");
-
     localStorage.removeItem(this.ACCESS_TOKEN);
     localStorage.removeItem(this.REFRESH_TOKEN);
+
     if (reload) {
       this.router.navigate([this.router.url]);
     }

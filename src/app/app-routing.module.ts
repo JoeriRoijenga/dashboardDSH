@@ -5,6 +5,7 @@ import { OverviewComponent } from './modules/user/overview/overview.component';
 import { NotLoggedInGuard } from './services/guards/NotLoggedIn.guard';
 import { LoggedInGuard } from './services/guards/LoggedIn.guard';
 import { LogoutComponent } from './modules/user/logout/logout.component';
+import { SettingsComponent } from './modules/settings/settings.component';
 
 const routes: Routes = [
   { path: '', canActivate: [NotLoggedInGuard], children: [
@@ -13,7 +14,8 @@ const routes: Routes = [
   },
 
   { path: '', canActivate: [LoggedInGuard], children: [
-      { path: 'overview', component: OverviewComponent },
+      { path: 'admin', component: OverviewComponent },
+      { path: 'settings', component: SettingsComponent },
       { path: 'logout', component: LogoutComponent },
     ]
   }
