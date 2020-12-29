@@ -12,6 +12,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { NotLoggedInGuard } from './services/guards/NotLoggedIn.guard';
 import { LoggedInGuard } from './services/guards/LoggedIn.guard';
 import { HttpRequestInterceptor } from './services/interceptors/HttpRequest.interceptor';
+import { SettingsModule } from './modules/settings/settings.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { HttpRequestInterceptor } from './services/interceptors/HttpRequest.inte
         SectionsModule,
         BrowserAnimationsModule,
         MatDialogModule,
+        SettingsModule,
     ],
   providers: [
     {
