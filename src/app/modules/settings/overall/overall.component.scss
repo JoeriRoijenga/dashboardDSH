@@ -8,65 +8,6 @@ h1 {
   font-weight: bold;
 }
 
-.notification-options {
-  margin: 10px;
-  display: inline-block;
-  width: 100px;
-  padding: 1px;
-}
-
-.general-notification-settings {
-  width: 50%;
-  text-align: center;
-}
-
-.notification-settings {
-  margin: 10px;
-}
-
-.connected-devices {
-  width: 50%;
-  .header {
-    width: 100%;
-    border-bottom: 0px;
-    display: flex;
-    label {
-      justify-content: flex-start;
-      font-weight: bold;
-    }
-    button {
-      justify-content: flex-end;
-    }
-  }
-
-  .devices-table {
-    table {
-      width: 100%;
-
-      td, th {
-        border: 1px solid #ddd;
-        padding: 8px;
-      }
-
-      tr:nth-child(even){
-        background-color: rgb(212, 235, 255);
-      }
-
-      tr:hover {
-        background-color: rgb(190, 225, 255);
-      }
-
-      th {
-        padding-top: 12px;
-        padding-bottom: 12px;
-        text-align: left;
-        background-color: #4b99ff;
-        color: white;
-      }
-    }
-  }
-}
-
 .settings {
   display: flex;
 }

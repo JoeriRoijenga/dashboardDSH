@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SettingsComponent } from './settings.component';
-import { OverallComponent } from './overall/overall.component';
 import { SensorComponent } from './sensor/sensor.component';
-
+import { OverallModule } from './overall/overall.module';
 
 
 @NgModule({
   declarations: [
     SettingsComponent,
-    OverallComponent,
-    SensorComponent],
+    SensorComponent,
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+    OverallModule
   ]
 })
 export class SettingsModule { }

@@ -18,17 +18,17 @@ import { SettingsModule } from './modules/settings/settings.module';
   declarations: [
     AppComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        SectionsModule,
-        UserModule,
-        HttpClientModule,
-        SectionsModule,
-        BrowserAnimationsModule,
-        MatDialogModule,
-        SettingsModule,
-    ],
+  imports: [
+      BrowserModule,
+      AppRoutingModule,
+      SectionsModule,
+      UserModule,
+      HttpClientModule,
+      SectionsModule,
+      BrowserAnimationsModule,
+      MatDialogModule,
+      SettingsModule,
+  ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
