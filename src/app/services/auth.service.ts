@@ -20,8 +20,8 @@ export class AuthService {
     private router: Router,
   ) { }
 
-  public create_user(name: string, pwd: string, mail: string): Observable<boolean> {
-    return this.http.post( `${environment.urlAPI}/users/create`, {name: name, pwd: pwd, mail: mail}).pipe(
+  public create_user(name: string, pwd: string, mail: string, admin: boolean): Observable<boolean> {
+    return this.http.post( `${environment.urlAPI}/users/create`, {name: name, pwd: pwd, mail: mail, admin: Number(admin)}).pipe(
       mapTo(true),
       catchError(error => {
         console.log(error.error);
