@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './notifications.component.html',
   styleUrls: [
     './notifications.component.scss',
-    './../overall.component.scss'
+    './../../settings.component.scss'
   ]
 })
 export class NotificationsComponent implements OnInit {

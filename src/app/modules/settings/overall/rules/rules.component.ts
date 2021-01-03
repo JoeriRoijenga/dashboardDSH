@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './rules.component.html',
   styleUrls: [
     './rules.component.scss',
-    './../overall.component.scss'
+    './../../settings.component.scss'
   ]
 })
 export class RulesComponent implements OnInit {

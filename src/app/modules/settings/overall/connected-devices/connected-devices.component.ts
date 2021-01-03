@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './connected-devices.component.html',
   styleUrls: [
     './connected-devices.component.scss',
-    './../overall.component.scss'
+    './../../settings.component.scss'
   ]
 })
 export class ConnectedDevicesComponent implements OnInit {
