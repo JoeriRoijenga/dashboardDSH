@@ -13,10 +13,12 @@ import { NotLoggedInGuard } from './services/guards/NotLoggedIn.guard';
 import { LoggedInGuard } from './services/guards/LoggedIn.guard';
 import { HttpRequestInterceptor } from './services/interceptors/HttpRequest.interceptor';
 import { SettingsModule } from './modules/settings/settings.module';
+import { HomeComponent } from './modules/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
   ],
   imports: [
       BrowserModule,

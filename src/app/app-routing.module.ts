@@ -6,9 +6,11 @@ import { NotLoggedInGuard } from './services/guards/NotLoggedIn.guard';
 import { LoggedInGuard } from './services/guards/LoggedIn.guard';
 import { LogoutComponent } from './modules/user/logout/logout.component';
 import { SettingsComponent } from './modules/settings/settings.component';
+import { HomeComponent } from './modules/home/home.component';
 
 const routes: Routes = [
   { path: '', canActivate: [NotLoggedInGuard], children: [
+      { path: '', component: HomeComponent },
       { path: 'login', component: LoginComponent },
     ]
   },
@@ -19,6 +21,8 @@ const routes: Routes = [
       { path: 'logout', component: LogoutComponent },
     ]
   }
+
+
 ];
 
 @NgModule({
