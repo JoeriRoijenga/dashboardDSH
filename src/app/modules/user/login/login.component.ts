@@ -33,6 +33,15 @@ export class LoginComponent implements OnInit {
       this.invalidLogin = true;
     }
 
+    // this.authService.create_user("test", "test2", "test@test.com", true).subscribe(
+    //   success => {
+    //     if (success) {
+    //       this.router.navigate(['/admin']);
+    //     }
+    //     this.invalidLogin = true;
+    //   }
+    // );
+
     this.authService.login(this.loginForm.controls.mail.value, this.loginForm.controls.password.value).subscribe(
       success => {
         if (success) {

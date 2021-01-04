@@ -5,7 +5,8 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './sensor.component.html',
   styleUrls: [
     './sensor.component.scss',
-    './../sensors.component.scss'
+    './../sensors.component.scss',
+    './../../settings.component.scss',
   ]
 })
 export class SensorComponent implements OnInit {
