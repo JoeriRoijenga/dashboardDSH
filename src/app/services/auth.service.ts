@@ -12,8 +12,8 @@ import { Router } from '@angular/router';
 
 export class AuthService {
 
-  private readonly ACCESS_TOKEN = "access_token";
-  private readonly REFRESH_TOKEN = "refresh_token";
+  private readonly ACCESS_TOKEN = 'access_token';
+  private readonly REFRESH_TOKEN = 'refresh_token';
 
   constructor(
     private http: HttpClient,
@@ -21,7 +21,7 @@ export class AuthService {
   ) { }
 
   public create_user(name: string, pwd: string, mail: string): Observable<boolean> {
-    return this.http.post( `${environment.urlAPI}/users/create`, {name: name, pwd: pwd, mail: mail}).pipe(
+    return this.http.post( `${environment.urlAPI}/users/create`, {name, pwd, mail}).pipe(
       mapTo(true),
       catchError(error => {
         console.log(error.error);
@@ -31,7 +31,7 @@ export class AuthService {
   }
 
   public login(mail: string, pwd: string): Observable<boolean> {
-    return this.http.post<any>(`${environment.urlAPI}/users/login`, {mail: mail, pwd: pwd}).pipe(
+    return this.http.post<any>(`${environment.urlAPI}/users/login`, {mail, pwd}).pipe(
       tap(response => {
         this.saveTokens(response.tokens);
       }),
@@ -44,14 +44,14 @@ export class AuthService {
   }
 
   public logout(): Observable<any> {
-    var body = {}
+    let body = {};
     if (this.getRefreshToken() != null) {
-      body = {"token": this.getRefreshToken()}
+      body = {token: this.getRefreshToken()};
     }
 
     return this.http.post<any>(`${environment.urlAPI}/users/logout`, body).pipe(
       tap(() => {
-        this.removeTokens()
+        this.removeTokens();
       },
       catchError((error) => {
         console.log(error.message);
@@ -69,7 +69,7 @@ export class AuthService {
   }
 
   public refreshToken(): Observable<any> {
-    return this.http.post<any>(`${environment.urlAPI}/users/refresh`, {"refresh_token": this.getRefreshToken()}).pipe(
+    return this.http.post<any>(`${environment.urlAPI}/users/refresh`, {refresh_token: this.getRefreshToken()}).pipe(
       tap((response) => {
         this.saveAccessToken(response.access_token);
       },
@@ -87,14 +87,14 @@ export class AuthService {
   }
 
   public saveAccessToken(token): void {
-    localStorage.setItem(this.ACCESS_TOKEN, token)
+    localStorage.setItem(this.ACCESS_TOKEN, token);
   }
 
   public removeTokens(reload = true): void {
     localStorage.removeItem(this.ACCESS_TOKEN);
     localStorage.removeItem(this.REFRESH_TOKEN);
     if (reload) {
-      this.router.navigateByUrl(this.router.url).then()
+      this.router.navigateByUrl(this.router.url).then();
     }
   }
 
@@ -103,7 +103,7 @@ export class AuthService {
   }
 
   public getRefreshToken(): string {
-    var token = localStorage.getItem(this.REFRESH_TOKEN);
+    let token = localStorage.getItem(this.REFRESH_TOKEN);
     if (token != null) {
       if (!this.tokenValid(token) || this.tokenExpired(token)) {
         this.removeTokens();
@@ -118,7 +118,7 @@ export class AuthService {
     if ((token === null && this.getRefreshToken() !== null)) {
       return false;
     } else if (token !==  null) {
-      return token.split(".").length === 3;
+      return token.split('.').length === 3;
     }
 
     return true;

@@ -74,16 +74,16 @@ export class OverviewComponent implements OnInit {
     dialogConfig.autoFocus = true;
 
     dialogConfig.data = {
-      name: 'mosie mosie',
-      email: 'mosie@mail.com',
+      name: '',
+      email: '',
     };
 
-    this.dialog.open(DialogComponent, dialogConfig);
 
     const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
       data => console.log('dialog output: ', data)
     );
+
   }
 
 

@@ -21,7 +21,7 @@ export class DialogComponent implements OnInit{
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<DialogComponent>,
-    @Inject(MAT_DIALOG_DATA) data){
+    @Inject(MAT_DIALOG_DATA) data){ dialogRef.disableClose = false;
 
   }
 

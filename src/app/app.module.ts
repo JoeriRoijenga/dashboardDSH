@@ -12,8 +12,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { NotLoggedInGuard } from './services/guards/NotLoggedIn.guard';
 import { LoggedInGuard } from './services/guards/LoggedIn.guard';
 import { HttpRequestInterceptor } from './services/interceptors/HttpRequest.interceptor';
-import { JwtModule } from "@auth0/angular-jwt";
-import { AuthService } from './services/auth.service';
+
 
 // export function getToken() {
 //   if (AuthService.accessTokenValid(localStorage.getItem(AuthService.ACCESS_TOKEN))) {
