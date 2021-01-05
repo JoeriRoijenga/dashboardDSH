@@ -12,40 +12,26 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { NotLoggedInGuard } from './services/guards/NotLoggedIn.guard';
 import { LoggedInGuard } from './services/guards/LoggedIn.guard';
 import { HttpRequestInterceptor } from './services/interceptors/HttpRequest.interceptor';
+import { SettingsModule } from './modules/settings/settings.module';
+import { HomeComponent } from './modules/home/home.component';
 
-
-// export function getToken() {
-//   if (AuthService.accessTokenValid(localStorage.getItem(AuthService.ACCESS_TOKEN))) {
-//     console.log("new accesstoken, old:");
-//     console.log(localStorage.getItem(AuthService.ACCESS_TOKEN));
-//     return localStorage.getItem(AuthService.REFRESH_TOKEN);
-//   }
-
-//   console.log("current accesstoken");
-
-//   return localStorage.getItem(AuthService.ACCESS_TOKEN);
-// }
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        SectionsModule,
-        UserModule,
-        HttpClientModule,
-        SectionsModule,
-        BrowserAnimationsModule,
-        MatDialogModule,
-        // JwtModule.forRoot({
-        //   config: {
-        //     tokenGetter: getToken,
-        //     allowedDomains: ['localhost:5000']
-        //   }
-        // })
-    ],
+  imports: [
+      BrowserModule,
+      AppRoutingModule,
+      SectionsModule,
+      UserModule,
+      HttpClientModule,
+      SectionsModule,
+      BrowserAnimationsModule,
+      MatDialogModule,
+      SettingsModule,
+  ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

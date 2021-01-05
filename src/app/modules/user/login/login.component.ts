@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { log } from 'util';
 import { Router } from '@angular/router';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -32,10 +33,19 @@ export class LoginComponent implements OnInit {
       this.invalidLogin = true;
     }
 
+    // this.authService.create_user("test", "test2", "test@test.com", true).subscribe(
+    //   success => {
+    //     if (success) {
+    //       this.router.navigate(['/admin']);
+    //     }
+    //     this.invalidLogin = true;
+    //   }
+    // );
+
     this.authService.login(this.loginForm.controls.mail.value, this.loginForm.controls.password.value).subscribe(
       success => {
         if (success) {
-          this.router.navigate(['/overview']);
+          this.router.navigate(['/admin']);
         }
         this.invalidLogin = true;
       }

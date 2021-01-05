@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-menu',
@@ -6,10 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
+  loggedIn: string = "";
+  loggedInUrl: string = "";
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(
+    private authService: AuthService
+  ) {
+    this.loggedIn = "Logout";
+    this.loggedInUrl = "/logout"
+    if (!this.authService.isLoggedIn()) {
+      this.loggedIn = "Login";
+      this.loggedInUrl = "/login"
+    }
   }
 
+  ngOnInit(): void { }
 }
