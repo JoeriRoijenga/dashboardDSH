@@ -2,10 +2,20 @@
   text-align: center;
   padding-top: 10px;
   border-bottom: black solid 1px;
-}
+  // display: flex;
+  // justify-content: center;
 
-h1 {
-  font-weight: bold;
+  > h1 {
+    font-weight: bold;
+    display: inline-block;
+  }
+
+  .settings-button {
+    margin: 0px 10px 0px 0px;
+    width: 250px;
+    position: absolute;
+    right: 10px;
+  }
 }
 
 .settings {
