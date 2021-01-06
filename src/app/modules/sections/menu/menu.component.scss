@@ -15,11 +15,14 @@
   background: aliceblue;
   transition: 0.5s;
   overflow: hidden;
+  z-index: 0;
+  top: 0px;
 }
 .navigation:hover,
 .navigation.active
 {
   width: 300px;
+  //z-index: 1000;
 }
 .navigation ul
 {

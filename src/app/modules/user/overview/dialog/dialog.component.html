@@ -16,10 +16,24 @@
       </label>
     </mat-form-field>
   </dt>
+  <dt>
+    <mat-form-field>
+      <label>
+        <input matInput placeholder="password" formControlName="password">
+      </label>
+    </mat-form-field>
+  </dt>
+  <dt>
+    <mat-form-field>
+      <label>
+        <input matInput placeholder="repeat password" formControlName="repeat password">
+      </label>
+    </mat-form-field>
+  </dt>
 </dl>
 
   <mat-dialog-actions>
-    <button class="mat-raised-button"(click)="close()">Close</button>
-    <button class="mat-raised-button mat-primary"(click)="save()">Save</button>
+    <button class="close-button"(click)="close()">Close</button>
+    <button class="save-button"(click)="save()">Save</button>
   </mat-dialog-actions>
 </div>

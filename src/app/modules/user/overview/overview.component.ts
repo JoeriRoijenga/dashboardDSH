@@ -66,7 +66,9 @@ export class OverviewComponent implements OnInit {
         }
       );
   }
+  removeUser(): void{
 
+  }
   openAddUser(): void{
     const dialogConfig = new MatDialogConfig();
 

@@ -1,0 +1,22 @@
+.close-button, .save-button
+{
+  cursor: pointer;
+  border: 1px solid #00B6E3;
+  background-color: aliceblue;
+  margin: 2px;
+  text-align: center;
+  border-radius: 2px;
+
+}
+.save-button:hover
+{
+  background-color: #00B6E3;
+  transition: 0.2s;
+}
+
+
+.close-button:hover
+{
+  background-color: #66a8ff;
+  transition: 0.2s;
+}
