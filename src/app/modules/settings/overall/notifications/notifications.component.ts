@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { SettingsService } from 'src/app/services/settings.service';
 
 @Component({
@@ -10,6 +10,8 @@ import { SettingsService } from 'src/app/services/settings.service';
   ]
 })
 export class NotificationsComponent implements OnInit {
+  @Output() outputData = new EventEmitter<any>();
+
   public notification: number = 0;
   public sms: number = 0;
   public mail: number = 0;
@@ -28,5 +30,11 @@ export class NotificationsComponent implements OnInit {
         }
       }
     );
+  }
+
+  changeSetting(setting) {
+    this.outputData.emit({
+      [setting.id]: Number(setting.checked)
+    });
   }
 }
