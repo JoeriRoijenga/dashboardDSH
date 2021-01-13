@@ -41,8 +41,8 @@ export class SettingsService {
     return this.http.put(`${environment.urlAPI}/settings/save/general`, {"settings": this.notificationSettings});
   }
 
-  public getSensors(sensor_id: number): Observable<any> {
-    return this.http.get(`${environment.urlAPI}/settings/get/sensors/${sensor_id}`, {}).pipe(
+  public getSensors(type_id: number): Observable<any> {
+    return this.http.get(`${environment.urlAPI}/settings/get/sensors/${type_id}`, {}).pipe(
       tap((response) => {
         
       },
@@ -83,5 +83,17 @@ export class SettingsService {
     );
 
     return this.http.put(`${environment.urlAPI}/settings/save/sensor/type/notifications/${type}`, {"settings": this.notificationSettings});
+  }
+
+  public getActuators(): Observable<any> {
+    return this.http.get(`${environment.urlAPI}/settings/get/actuators`, {}).pipe(
+      tap((response) => {
+        
+      },
+      catchError(error => {
+        console.log(error.error);
+        return of(false);
+      })
+    ));
   }
 }
