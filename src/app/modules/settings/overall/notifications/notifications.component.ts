@@ -27,7 +27,7 @@ export class NotificationsComponent implements OnInit {
           this.notification = setting.type === "notifications" ? setting.on : this.notification;
           this.sms = setting.type === "sms" ? setting.on : this.sms;
           this.mail = setting.type === "mail" ? setting.on : this.mail;
-        }
+        }       
       }
     );
   }
