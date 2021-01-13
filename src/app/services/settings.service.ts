@@ -40,4 +40,28 @@ export class SettingsService {
 
     return this.http.put(`${environment.urlAPI}/settings/save/general`, {"settings": this.notificationSettings});
   }
+
+  public getSensors(sensor_id: number): Observable<any> {
+    return this.http.get(`${environment.urlAPI}/settings/get/sensors/${sensor_id}`, {}).pipe(
+      tap((response) => {
+        
+      },
+      catchError(error => {
+        console.log(error.error);
+        return of(false);
+      })
+    ));
+  }
+
+  public getSensorTypes(): Observable<any> {
+    return this.http.get(`${environment.urlAPI}/settings/get/sensor/types`, {}).pipe(
+      tap((response) => {
+        
+      },
+      catchError(error => {
+        console.log(error.error);
+        return of(false);
+      })
+    ));
+  }
 }

@@ -1,5 +1,5 @@
 <!-- <p>sensor works!</p> -->
 <!-- flex container gebruiken! -->
 <div class="flex-container">
-  <app-sensor *ngFor="let name of names" [header]="name" class="sensor"></app-sensor>
+  <app-sensor *ngFor="let type of types" [header]="type.name" [type]="type.id" class="sensor"></app-sensor>
 </div>

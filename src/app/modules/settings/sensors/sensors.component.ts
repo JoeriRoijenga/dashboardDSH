@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SettingsService } from 'src/app/services/settings.service';
 
 @Component({
   selector: 'app-sensors',
@@ -7,15 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SensorsComponent implements OnInit {
 
-  names = [
-    "Temparature",
-    "Humidity",
-    "Pressure"
-  ];
+  types = [];
 
-  constructor() { }
+  constructor(
+    private settingsService: SettingsService,
+  ) { }
 
   ngOnInit(): void {
+    this.settingsService.getSensorTypes().subscribe(response => {
+      for (let sensor_type in response.sensor_types) {
+        this.types.push(response.sensor_types[sensor_type])
+      }
+      console.log(this.types);
+      
+    });
   }
 
 }

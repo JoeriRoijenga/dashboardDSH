@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { SettingsService } from 'src/app/services/settings.service';
 
 @Component({
   selector: 'app-sensor',
@@ -12,10 +13,23 @@ import { Component, Input, OnInit } from '@angular/core';
 export class SensorComponent implements OnInit {
 
   @Input() header: string;
+  @Input() type: number;
 
-  constructor() { }
+  public sensors = [];
+
+  constructor(
+    private settingsService: SettingsService,
+  ) { }
 
   ngOnInit(): void {
+    this.settingsService.getSensors(this.type).subscribe(
+      response => {
+        console.log(response);
+        for (let sensor in response.sensors) {
+          this.sensors.push(response.sensors[sensor]);
+        }        
+      }
+    );
   }
 
 }

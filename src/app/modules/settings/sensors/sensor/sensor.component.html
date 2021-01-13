@@ -24,13 +24,10 @@
   <div class="sensors-table">
     <table>
       <tr>
-        <th>Name</th>
+        <th>Sensor Name</th>
       </tr>
-      <tr>
-        <td>{{header}}1</td>
-      </tr>
-      <tr>
-        <td>{{header}}2</td>
+      <tr *ngFor="let sensor of sensors">
+        <td id="{{sensor.id}}">{{sensor.name}}</td>
       </tr>
     </table>
   </div>
