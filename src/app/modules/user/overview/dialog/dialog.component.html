@@ -1,39 +1,79 @@
 <h1 mat-dialog-title> Add user to system</h1>
+<div class="jumbotron">
+  <div class="container">
+    <form [formGroup]="registerForm">
+      <dl>
+        <dt>
+          <mat-form-field>
+            <label>
+              <input   matInput type="text" placeholder="first name" formControlName="firstName"[ngClass]="{ 'is-invalid': submitted && error.firstName.errors }" />
+              <div *ngIf="submitted && error.firstName.errors" class="invalid-feedback">
+                <div *ngIf=" error.firstName.errors.required">First Name is required</div>
+              </div>
+            </label>
+          </mat-form-field>
+        </dt>
+        <dt>
+          <mat-form-field>
+            <label>
+              <input  matInput type="text" placeholder="last name" formControlName="lastName"[ngClass]="{ 'is-invalid': submitted && error.lastName.errors }" />
+              <div *ngIf="submitted && error.lastName.errors" class="invalid-feedback">
+                <div *ngIf="error.lastName.errors.required">Last Name is required</div>
+              </div>
+            </label>
+          </mat-form-field>
+        </dt>
+        <dt>
+          <mat-form-field>
+            <label>
+              <input  matInput type="text" placeholder="email" formControlName="email" class="from-control" [ngClass]="{ 'is-invalid': submitted && error.email.errors }" />
+              <div *ngIf="submitted && error.email.errors" class="invalid-feedback">
+                <div *ngIf="error.email.errors.required">Email is required</div>
+                <div *ngIf="error.email.errors.email">Email must be a valid email address</div>
+              </div>
+            </label>
+          </mat-form-field>
+        </dt>
+<!--        <dt>-->
+<!--          <mat-form-field>-->
+<!--            <label>-->
+<!--              <input  matInput type="text" placeholder="email" formControlName="email" class="from-control" [ngClass]="{ 'is-invalid': submitted && error.email.errors }" />-->
+<!--              <div *ngIf="submitted && error.email.errors" class="invalid-feedback">-->
+<!--                <div *ngIf="error.email.errors.required">Email is required</div>-->
+<!--                <div *ngIf="error.email.errors.email">Email must be a valid email address</div>-->
+<!--              </div>-->
+<!--            </label>-->
+<!--          </mat-form-field>-->
+<!--        </dt>-->
+        <dt>
+          <mat-form-field>
+            <label>
+              <input   matInput type="password" placeholder="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && error.password.errors }" />
+              <div *ngIf="submitted && error.password.errors" class="invalid-feedback">
+                <div *ngIf="error.password.errors.required">Password is required</div>
+                <div *ngIf="error.password.errors.minlength">Password must be at least 6 characters</div>
+              </div>
+            </label>
+          </mat-form-field>
+        </dt>
+        <dt>
+          <mat-form-field>
+            <label>
+              <input matInput type="password" placeholder="repeat password" formControlName="confirmPassword"[ngClass]="{ 'is-invalid': submitted && error.confirmPassword.errors }" />
+              <div *ngIf="submitted && error.confirmPassword.errors" class="invalid-feedback">
+                <div *ngIf="error.confirmPassword.errors.required">Confirm Password is required</div>
+                <div *ngIf="error.confirmPassword.errors.checkPWD">Passwords must match</div>
+              </div>
+            </label>
+          </mat-form-field>
+        </dt>
+      </dl>
 
-<div>
-<dl>
-  <dt>
-    <mat-form-field>
-      <label>
-        <input matInput placeholder="user name" formControlName="name">
-      </label>
-    </mat-form-field>
-  </dt>
-  <dt>
-    <mat-form-field>
-      <label>
-        <input matInput placeholder="email" formControlName="email">
-      </label>
-    </mat-form-field>
-  </dt>
-  <dt>
-    <mat-form-field>
-      <label>
-        <input matInput placeholder="password" formControlName="password">
-      </label>
-    </mat-form-field>
-  </dt>
-  <dt>
-    <mat-form-field>
-      <label>
-        <input matInput placeholder="repeat password" formControlName="repeat password">
-      </label>
-    </mat-form-field>
-  </dt>
-</dl>
-
-  <mat-dialog-actions>
-    <button class="close-button"(click)="close()">Close</button>
-    <button class="save-button"(click)="save()">Save</button>
-  </mat-dialog-actions>
+      <mat-dialog-actions>
+      <!--    <button class="close-button"(click)="close()">Close</button>-->
+        <button class="save-button btn btn-primary"(click)="save()">Save</button>
+      </mat-dialog-actions>
+      </form>
+    </div>
 </div>
+

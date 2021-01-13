@@ -8,12 +8,14 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import { LogoutComponent } from './logout/logout.component';
 
+
 @NgModule({
   declarations: [
     LoginComponent,
     OverviewComponent,
     DialogComponent,
     LogoutComponent
+
   ],
   imports: [
     CommonModule,

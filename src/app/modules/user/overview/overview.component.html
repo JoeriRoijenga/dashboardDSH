@@ -8,12 +8,12 @@
         <th>Name</th>
         <th>Email</th>
         <th>admin rights</th>
-        <th>remove</th>
+        <th></th>
       </tr>
       <tr *ngFor="let user of users">
         <td>{{user.name}}</td>
-        <td>{{user.email}}</td>
-        <td>{{user.adminrights ? '&#10003;' : '&#10005;'}}</td>
+        <td>{{user.mail}}</td>
+        <td>{{user.admin ? '&#10003;' : '&#10005;'}}</td>
         <td><button class="remove-button"(click)="removeUser()"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
       </tr>
 

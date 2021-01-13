@@ -104,7 +104,7 @@ export class AuthService {
   }
 
   public getRefreshToken(): string {
-    let token = localStorage.getItem(this.REFRESH_TOKEN);
+    const token = localStorage.getItem(this.REFRESH_TOKEN);
     if (token != null) {
       if (!this.tokenValid(token) || this.tokenExpired(token)) {
         this.removeTokens();
