@@ -18,9 +18,7 @@ export class SensorsComponent implements OnInit {
     this.settingsService.getSensorTypes().subscribe(response => {
       for (let sensor_type in response.sensor_types) {
         this.types.push(response.sensor_types[sensor_type])
-      }
-      console.log(this.types);
-      
+      }      
     });
   }
 

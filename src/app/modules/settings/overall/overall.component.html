@@ -2,10 +2,9 @@
   <h1>
     Overall
   </h1>
-  <button class="settings-button" (click)="saveAll()">Save All</button>
 </div>
 <div class="settings">
-  <app-notifications (outputData)="saveNotification($event)" class="screen-size"></app-notifications>
+  <app-notifications class="screen-size"></app-notifications>
   <app-connected-devices class="screen-size"></app-connected-devices>
   <app-rules class="screen-size"></app-rules>
 </div>
