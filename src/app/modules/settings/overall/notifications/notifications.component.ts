@@ -10,7 +10,6 @@ import { SettingsService } from 'src/app/services/settings.service';
   ]
 })
 export class NotificationsComponent implements OnInit {
-  // @Output() outputData = new EventEmitter<any>();
 
   public notification: number = 0;
   public sms: number = 0;
@@ -36,9 +35,6 @@ export class NotificationsComponent implements OnInit {
     this.notification = setting.id === "notifications" ? Number(setting.checked) : this.notification;
     this.sms = setting.id === "sms" ? Number(setting.checked) : this.sms;
     this.mail = setting.id === "mail" ? Number(setting.checked) : this.mail;
-    // this.outputData.emit({
-    //   [setting.id]: Number(setting.checked)
-    // });
   }
 
   save() {
