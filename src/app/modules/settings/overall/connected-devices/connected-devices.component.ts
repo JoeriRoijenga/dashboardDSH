@@ -19,9 +19,7 @@ export class ConnectedDevicesComponent implements OnInit {
   ngOnInit(): void {
     this.settingsServive.getActuators().subscribe(
       response => {
-        console.log(response.actuators);
         for (let actuator of response.actuators) {
-          console.log(actuator);
           this.actuators.push(
             {
               "id": actuator.id,
@@ -31,7 +29,6 @@ export class ConnectedDevicesComponent implements OnInit {
             }
           )
         }
-        console.log(this.actuators);
                 
       }
     );
