@@ -1,25 +1,19 @@
 <div class="connected-devices">
   <div class="header">
     <h2>Connected Devices</h2>
-    <button class="settings-button">Add Device</button>
+    <!-- <button class="settings-button">Add Device</button> -->
   </div>
   <div class="devices-table">
     <table>
       <tr>
         <th>Name</th>
         <th>Type</th>
+        <th>State</th>
       </tr>
-      <tr>
-        <td>W1</td>
-        <td>Window</td>
-      </tr>
-      <tr>
-        <td>D1</td>
-        <td>Door</td>
-      </tr>
-      <tr>
-        <td>V1</td>
-        <td>Ventilator</td>
+      <tr *ngFor="let actuator of actuators">
+        <td>{{actuator.name}}</td>
+        <td>{{actuator.type_name}}</td>
+        <td>{{actuator.current_state}}</td>
       </tr>
     </table>
   </div>

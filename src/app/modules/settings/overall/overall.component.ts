@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SettingsService } from 'src/app/services/settings.service';
 
 @Component({
   selector: 'app-overall',
@@ -9,10 +10,10 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class OverallComponent implements OnInit {
-
-  constructor() { }
+  constructor(
+    private settingsService: SettingsService,
+  ) { }
 
   ngOnInit(): void {
   }
-
 }
