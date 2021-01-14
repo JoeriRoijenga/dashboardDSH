@@ -74,7 +74,7 @@ export class GraphComponent implements OnInit {
     setInterval(() => {
       a += 10000;     
       this.dataPoints.push({x: a, y: Number(Math.floor((Math.random() * (20 - 19 + 1) + 20) * 100) / 100)});
-      chart.render();      
+      chart.render();
     }, 3000);
   }
 
