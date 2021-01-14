@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, pipe, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { catchError, mapTo, tap } from 'rxjs/operators';
+import { catchError, mapTo, tap, } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 
@@ -24,7 +24,6 @@ export class AuthService {
     return this.http.post( `${environment.urlAPI}/users/create`, {name: name, pwd: pwd, mail: mail, admin: Number(admin)}).pipe(
       mapTo(true),
       catchError(error => {
-        console.log(error.error);
         return of(false);
       })
     );
@@ -32,12 +31,11 @@ export class AuthService {
 
   public login(mail: string, pwd: string): Observable<boolean> {
     return this.http.post<any>(`${environment.urlAPI}/users/login`, {mail, pwd}).pipe(
-      tap(response => {
+      tap(response => {         
         this.saveTokens(response.tokens);
       }),
       mapTo(true),
-      catchError(error => {
-        console.log(error.error);
+      catchError(() => {        
         return of(false);
       })
     );

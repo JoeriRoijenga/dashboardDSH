@@ -39,6 +39,9 @@ export class HttpRequestInterceptor implements HttpInterceptor {
         }
         this.refresh = false;
         this.authService.removeTokens();
+        console.log("throw error");
+        
+        return throwError(error);
       }
     ));
   }

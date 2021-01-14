@@ -9,14 +9,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  invalidLogin: boolean;
+  public invalidLogin: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
   ) {
-    this.invalidLogin = false;
+    this.invalidLogin = true;
   }
 
   loginForm = this.formBuilder.group({
@@ -31,21 +31,13 @@ export class LoginComponent implements OnInit {
       this.invalidLogin = true;
     }
 
-    // this.authService.create_user("test", "test2", "test@test.com", true).subscribe(
-    //   success => {
-    //     if (success) {
-    //       this.router.navigate(['/admin']);
-    //     }
-    //     this.invalidLogin = true;
-    //   }
-    // );
-
     this.authService.login(this.loginForm.controls.mail.value, this.loginForm.controls.password.value).subscribe(
-      success => {
-        if (success) {
+      response => {
+        if (response) {
           this.router.navigate(['/admin']);
         }
-        this.invalidLogin = true;
+        
+        this.invalidLogin = false;
       }
     );
   }

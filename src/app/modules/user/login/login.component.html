@@ -6,7 +6,7 @@
       <input type="text" placeholder="E-mail Address" formControlName="mail" autocomplete="off" />
       <input type="password" placeholder="Password" formControlName="password" />
       <button class="login-submit" [disabled]="loginForm.invalid">Login</button>
-      <div *ngIf="invalidLogin" style="color: white; font-weight: bold;">
+      <div [hidden]="invalidLogin" style="color: white; font-weight: bold;">
           <span>Invalid username or password!</span>
       </div>
     </form>
