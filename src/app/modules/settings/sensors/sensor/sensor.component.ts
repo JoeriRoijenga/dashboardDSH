@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { range } from 'rxjs';
 import { SettingsService } from 'src/app/services/settings.service';
 
 @Component({
@@ -14,7 +15,9 @@ export class SensorComponent implements OnInit {
 
   @Input() header: string;
   @Input() type: number;
-
+  
+  public btnSave: string = "Save";
+  
   public sensors = [];
   public settings = [];
 
@@ -51,6 +54,8 @@ export class SensorComponent implements OnInit {
   }
 
   saveNotifications() {
+    this.btnSave = "Saving";
+
     this.settingsService.saveSensorTypeNotificationSettings(
       this.type, 
       {
@@ -61,6 +66,11 @@ export class SensorComponent implements OnInit {
       ).subscribe(
       response => {
         console.log(response);
+        this.btnSave = "Saved!"
+        
+        setTimeout(() => {
+          this.btnSave = "Save";
+        }, 5000);
       }
     );
   }

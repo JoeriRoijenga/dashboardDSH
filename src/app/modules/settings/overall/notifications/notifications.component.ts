@@ -11,6 +11,8 @@ import { SettingsService } from 'src/app/services/settings.service';
 })
 export class NotificationsComponent implements OnInit {
 
+  public btnSave: string = "Save";
+  
   public notification: number = 0;
   public sms: number = 0;
   public mail: number = 0;
@@ -38,6 +40,7 @@ export class NotificationsComponent implements OnInit {
   }
 
   save() {
+    this.btnSave = "Saving";
     this.settingsService.saveNotificationSettings(
       {
         "notifications": this.notification,
@@ -47,6 +50,11 @@ export class NotificationsComponent implements OnInit {
     ).subscribe(
       response => {
         console.log(response);
+        this.btnSave = "Saved!"
+
+        setTimeout(() => {
+          this.btnSave = "Save";
+        }, 5000);
       }
     );
   }
