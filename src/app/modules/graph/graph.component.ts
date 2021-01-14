@@ -40,7 +40,7 @@ export class GraphComponent implements OnInit {
         },  
       ],
       axisX: {      
-        valueFormatString: "yyyy-MM-dd HH:mm:ss",
+        valueFormatString: "HH:mm:ss",
         title: "timeline",
       },
       axisY: {
@@ -72,10 +72,10 @@ export class GraphComponent implements OnInit {
     var a = 1610544635000;
 
     setInterval(() => {
-      a += 100000;     
-      this.dataPoints.push({x: a, y: Number(22)});
+      a += 10000;     
+      this.dataPoints.push({x: a, y: Number(Math.floor((Math.random() * (20 - 19 + 1) + 20) * 100) / 100)});
       chart.render();      
-    }, 5000);
+    }, 3000);
   }
 
   public data(sensorData):void {   
@@ -84,10 +84,6 @@ export class GraphComponent implements OnInit {
         this.dataPoints.push({x: sensorData[i].dateTime, y: Number(sensorData[i].value)});
       }
     }
-
-//     setTimeout(() => {
-//       this.updateChart();
-//     }, 10000);
   }
 
   updateChart(): void{
