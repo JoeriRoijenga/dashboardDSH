@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {AuthService} from "../../services/auth.service";
-//import * as CanvasJS from "canvasjs";
+import * as moment from "moment";
 import {GraphsService} from "../../services/graphs.service";
 import * as CanvasJS from "src/assets/canvasjs-3.2.6/canvasjs.min.js";
 
@@ -19,8 +19,7 @@ export class GraphComponent implements OnInit {
   public tempData = [];
   public dateData = [];
   public dataPoints = [];
-
-
+  
 
   constructor(
     private dialog: MatDialog,
@@ -28,111 +27,83 @@ export class GraphComponent implements OnInit {
   ) {
   }
 
-  ngOnInit(): void {
-
-  let sensorData = [];
-  let dspLenght = 0;
-  let chart = new CanvasJS.Chart("chartContainer",{
+  ngOnInit(): void {   
+    let chart = new CanvasJS.Chart("chartContainer", {
+      zoomEnabled: true,
+      animationEnabled: true,
       exportEnabled: true,
-      title:{
-        text:"live temperatuur"
+      title: {
+        text: "Live Temperatuur"
       },
-      data:[{
-        type: "spline",
-        dataPoints: this.dataPoints,
-      }]
+      subtitles: [{
+          text: "Try Zooming and Panning"
+        },  
+      ],
+      axisX: {      
+        valueFormatString: "yyyy-MM-dd HH:mm:ss",
+        title: "timeline",
+      },
+      axisY: {
+        title: "Temperature"
+      },
+      data: [
+        {
+          type: "line",      
+          xValueType: "dateTime",          
+          dataPoints: this.dataPoints,
+        }
+      ],
     });
-    chart.render();
-    data();
-    console.log(this.dataPoints);
-    this.graphsService.getSensorData().subscribe( response => {
-      console.log('result');
-      console.log(response);
+
+  this.graphsService.getSensorData().subscribe( response => {
       for(const data in response.sensor_data){
+        if(response.sensor_data[data].id === 4){
+          this.dataPoints.push({x: Number(moment(response.sensor_data[data].datetime).format("x")),  y: Number(response.sensor_data[data].value)});
+        }      
+      }
+      chart.render();
+    },
+    error => {
+      console.log('error');
+      console.log(error.error);
+    });
+
+    // Testing adding data
+    var a = 1610544635000;
+
+    setInterval(() => {
+      a += 100000;     
+      this.dataPoints.push({x: a, y: Number(22)});
+      chart.render();      
+    }, 5000);
+  }
+
+  public data(sensorData):void {   
+    for(var i =0; i < sensorData.length; i++){
+      if(sensorData[i].id === 4){
+        this.dataPoints.push({x: sensorData[i].dateTime, y: Number(sensorData[i].value)});
+      }
+    }
+
+//     setTimeout(() => {
+//       this.updateChart();
+//     }, 10000);
+  }
+
+  updateChart(): void{
+    console.log("update");
+    let sensorData = [];
+
+    this.graphsService.getSensorData().subscribe( response => {
+        for(const data in response.sensor_data){
           sensorData.push(response.sensor_data[data]);
         }
-      console.log(sensorData);
-     // console.log(dataPoints);
+        this.data(sensorData);
       },
       error => {
         console.log('error');
         console.log(error.error);
-      },
-
-    );
-    function data() {
-      // for (let temp of sensorData) {
-      //   console.log("weirddd"+ temp.value);
-      //   if (temp.id === 4) {
-      //     dataPoints.push({x: temp.dateTime, y: temp.value});
-      //     console.log('daaattaaaa'+ dataPoints);
-      //   }
-      // }
-      for(var i =0; i < sensorData.length; i++){
-        console.log(sensorData[i]);
-        if(sensorData[i].id === 4){
-          console.log(sensorData[i]);
-          this.dataPoints.push({x:sensorData[i].dateTime, y:sensorData[i].value});
-        }
-      }
-     // console.log('datapointsssss');
-     // console.log(dataPoints);
-      // let selectsensor = sensorData.find(sensorData => sensorData.id === 4)
-      // dataPoints.push({x:})
-      // console.log('dataPoints');
-      // console.log(dataPoints);
-      dspLenght = this.dataPoints.length;
-      console.log(dspLenght);
-      // chart.render();
-    }
-    function updateChart(){
-
-    }
-
-  }
-
-
-  updateChart(): void{
-
+    });
   }
 
 }
-    // let dataPoints = [];
-    // let dpsLength = 0;
-    // let chart = new CanvasJS.Chart("chartContainer",{
-    //   exportEnabled: true,
-    //   title:{
-    //     text:"Live Chart with Data-Points from External JSON"
-    //   },
-    //   data: [{
-    //     type: "spline",
-    //     dataPoints : dataPoints,
-    //   }]
-    // })
-
-
-    // $.getJSON("https://canvasjs.com/services/data/datapoints.php?xstart=1&ystart=25&length=20&type=json&callback=?", function(data) {
-    //   $.each(data, function(key, value){
-    //     dataPoints.push({x: value[0], y: parseInt(value[1])});
-    //   });
-    //   dpsLength = dataPoints.length;
-    //   chart.render();
-    //   updateChart();
-    // });
-
-    // function updateChart() {
-    //   $.getJSON("https://canvasjs.com/services/data/datapoints.php?xstart=" + (dpsLength + 1) + "&ystart=" + (dataPoints[dataPoints.length - 1].y) + "&length=1&type=json&callback=?", function(data) {
-    //     $.each(data, function(key, value) {
-    //       dataPoints.push({
-    //         x: parseInt(value[0]),
-    //         y: parseInt(value[1])
-    //       });
-    //       dpsLength++;
-    //     });
-    //
-    //     if (dataPoints.length >  20 ) {
-    //       dataPoints.shift();
-    //     }
-    //     chart.render();
-    //     setTimeout(function(){updateChart()}, 1000);
-    //   });

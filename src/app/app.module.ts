@@ -15,7 +15,7 @@ import { HttpRequestInterceptor } from './services/interceptors/HttpRequest.inte
 import { SettingsModule } from './modules/settings/settings.module';
 import { HomeComponent } from './modules/home/home.component';
 import {GraphComponent} from "./modules/graph/graph.component";
-import * as CanvasJS from "canvasjs";
+// import * as CanvasJS from "canvasjs";
 
 @NgModule({
   declarations: [
