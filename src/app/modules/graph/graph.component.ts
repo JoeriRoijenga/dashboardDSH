@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
-import {AuthService} from "../../services/auth.service";
 import * as moment from "moment";
 import {GraphsService} from "../../services/graphs.service";
 import * as CanvasJS from "src/assets/canvasjs-3.2.6/canvasjs.min.js";
@@ -14,8 +13,6 @@ import * as CanvasJS from "src/assets/canvasjs-3.2.6/canvasjs.min.js";
 
 
 export class GraphComponent implements OnInit {
-
-
   public tempData = [];
   public dateData = [];
   public dataPoints = [];
@@ -55,50 +52,39 @@ export class GraphComponent implements OnInit {
       ],
     });
 
-  this.graphsService.getSensorData().subscribe( response => {
+    let lastDateTime: string;
+
+    this.graphsService.getSensorData().subscribe(response => {
       for(const data in response.sensor_data){
         if(response.sensor_data[data].id === 4){
           this.dataPoints.push({x: Number(moment(response.sensor_data[data].datetime).format("x")),  y: Number(response.sensor_data[data].value)});
         }      
+        
+        if (Number(data) == (response.sensor_data.length - 1)) {
+          lastDateTime = response.sensor_data[data].datetime;      
+        }
       }
+
+      console.log(lastDateTime);
+      
       chart.render();
-    },
-    error => {
-      console.log('error');
-      console.log(error.error);
     });
 
-    // Testing adding data
-    var a = 1610544635000;
-
     setInterval(() => {
-      a += 10000;     
-      this.dataPoints.push({x: a, y: Number(Math.floor((Math.random() * (20 - 19 + 1) + 20) * 100) / 100)});
-      chart.render();
-    }, 3000);
+      this.updateChart(chart, lastDateTime);
+    }, 5000);
   }
 
-  public data(sensorData):void {   
-    for(var i =0; i < sensorData.length; i++){
-      if(sensorData[i].id === 4){
-        this.dataPoints.push({x: sensorData[i].dateTime, y: Number(sensorData[i].value)});
-      }
-    }
-  }
-
-  updateChart(): void{
-    console.log("update");
-    let sensorData = [];
-
-    this.graphsService.getSensorData().subscribe( response => {
+  updateChart(chart, lastDateTime): void{
+    this.graphsService.getSensorDataUpdate(lastDateTime).subscribe( response => {
+      if (response.sensor_data.length > 0) {
         for(const data in response.sensor_data){
-          sensorData.push(response.sensor_data[data]);
+          if(response.sensor_data[data].id === 4){
+            this.dataPoints.push({x: Number(moment(response.sensor_data[data].datetime).format("x")),  y: Number(response.sensor_data[data].value)});
+          }      
         }
-        this.data(sensorData);
-      },
-      error => {
-        console.log('error');
-        console.log(error.error);
+        chart.render();
+      }
     });
   }
 

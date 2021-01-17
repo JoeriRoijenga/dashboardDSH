@@ -4,6 +4,7 @@ import { Observable, of, pipe, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { catchError, mapTo, tap, } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { exit } from 'process';
 
 
 @Injectable({
@@ -88,7 +89,7 @@ export class AuthService {
     localStorage.setItem(this.ACCESS_TOKEN, token);
   }
 
-  public removeTokens(reload = true): void {
+  public removeTokens(reload = true): void {   
     localStorage.removeItem(this.ACCESS_TOKEN);
     localStorage.removeItem(this.REFRESH_TOKEN);
 

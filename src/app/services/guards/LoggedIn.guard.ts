@@ -10,7 +10,7 @@ export class LoggedInGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(): boolean | UrlTree {
-    if (!this.authService.isLoggedIn()) {
+      if (!this.authService.isLoggedIn()) {
       this.authService.removeTokens(false);
       return this.router.parseUrl("/login");
     }

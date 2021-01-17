@@ -7,7 +7,7 @@ import { LoggedInGuard } from './services/guards/LoggedIn.guard';
 import { LogoutComponent } from './modules/user/logout/logout.component';
 import { SettingsComponent } from './modules/settings/settings.component';
 import { HomeComponent } from './modules/home/home.component';
-import {GraphComponent} from "./modules/graph/graph.component";
+import { GraphComponent } from "./modules/graph/graph.component";
 
 const routes: Routes = [
   { path: '', canActivate: [NotLoggedInGuard], children: [
@@ -23,8 +23,6 @@ const routes: Routes = [
       { path: 'logout', component: LogoutComponent },
     ]
   }
-
-
 ];
 
 @NgModule({

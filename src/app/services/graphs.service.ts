@@ -15,7 +15,16 @@ export class GraphsService {
   ) { }
 
   public getSensorData(): Observable<any> {
-    return this.http.get( `${environment.urlAPI}/graphs/get/sensor/data`, {}).pipe(
+    return this.http.post( `${environment.urlAPI}/graphs/get/sensor/data`, {}).pipe(
+      catchError(error => {
+        console.log(error.error);
+        return of(false);
+      })
+    );
+  }
+
+  public getSensorDataUpdate(lastDateTime: string): Observable<any> {
+    return this.http.post( `${environment.urlAPI}/graphs/get/sensor/data`, {'datetime': lastDateTime}).pipe(
       catchError(error => {
         console.log(error.error);
         return of(false);
