@@ -1,6 +1,23 @@
 .chartContainer{
   height: 370px;
-  width: 50%;
-  margin-left: auto;
-  margin-right: auto;
+  width: 94%;
+  margin: 0px auto 20px 60px;
+}
+
+@media only screen and (max-width: 414px) {
+  .chartContainer {
+    width: 85%;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .chartContainer {
+    width: 83%;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .chartContainer {
+    width: 80%;
+  }
 }
