@@ -14,8 +14,8 @@ export class GraphsService {
     private http: HttpClient,
   ) { }
 
-  public getSensorData(): Observable<any> {
-    return this.http.post( `${environment.urlAPI}/graphs/get/sensor/data`, {}).pipe(
+  public getSensorData(id: number): Observable<any> {
+    return this.http.post( `${environment.urlAPI}/graphs/get/sensor/data`, {"id": id}).pipe(
       catchError(error => {
         console.log(error.error);
         return of(false);
@@ -23,8 +23,17 @@ export class GraphsService {
     );
   }
 
-  public getSensorDataUpdate(lastDateTime: string): Observable<any> {
-    return this.http.post( `${environment.urlAPI}/graphs/get/sensor/data`, {'datetime': lastDateTime}).pipe(
+  public getSensorDataUpdate(id: number, lastDateTime: string): Observable<any> {
+    return this.http.post( `${environment.urlAPI}/graphs/get/sensor/data`, {"id": id, 'datetime': lastDateTime}).pipe(
+      catchError(error => {
+        console.log(error.error);
+        return of(false);
+      })
+    );
+  }
+
+  public getSensors(): Observable<any> {
+    return this.http.get( `${environment.urlAPI}/graphs/get/sensors`, {}).pipe(
       catchError(error => {
         console.log(error.error);
         return of(false);

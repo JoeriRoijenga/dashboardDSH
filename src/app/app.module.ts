@@ -14,13 +14,15 @@ import { LoggedInGuard } from './services/guards/LoggedIn.guard';
 import { HttpRequestInterceptor } from './services/interceptors/HttpRequest.interceptor';
 import { SettingsModule } from './modules/settings/settings.module';
 import { HomeComponent } from './modules/home/home.component';
-import {GraphComponent} from "./modules/graph/graph.component";
+import { GraphsComponent } from "./modules/graphs/graphs.component";
+import { GraphComponent } from './modules/graphs/graph/graph.component';
 // import * as CanvasJS from "canvasjs";
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    GraphsComponent,
     GraphComponent
   ],
   imports: [
