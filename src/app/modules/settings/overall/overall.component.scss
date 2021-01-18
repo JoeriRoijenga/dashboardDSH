@@ -18,8 +18,21 @@
 
 .settings {
   display: flex;
+  flex-wrap: wrap;
 
   .screen-size {
     width: 33%;
+  }
+}
+
+@media only screen and (max-width: 414px) {
+  .header {
+    text-align: center;
+  }
+  .settings {  
+    .screen-size {
+      margin: 0px 0px 0px 10px;
+      width: 99%;
+    }
   }
 }

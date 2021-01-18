@@ -104,3 +104,27 @@
   left: 70px; 
   width: 95%;
 }
+
+@media only screen and (max-width: 414px) {
+  .offset-left {
+    width: 80%; 
+  }
+}
+
+@media only screen and (min-width: 414px) {
+  .offset-left {
+    width: 84%; 
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .offset-left {
+    width: 93%; 
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  .offset-left {
+    width: 95%; 
+  }
+}
