@@ -4,25 +4,25 @@
 <div class="navigation">
   <ul>
     <li>
-      <a [href]="['/graphs']">
+      <a routerLink="graphs">
         <span class="icon"><i class="fa fa-line-chart" aria-hidden="true"></i></span>
         <span class="title">Overview</span>
       </a>
     </li>
     <li>
-      <a [href]="['/settings']">
+      <a routerLink="settings">
         <span class="icon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
         <span class="title">Config</span>
       </a>
     </li>
     <li>
-      <a [href]="['/admin']">
+      <a routerLink="admin">
         <span class="icon"><i class="fa fa-users" aria-hidden="true"></i></span>
         <span class="title">User</span>
       </a>
     </li>
     <li>
-      <a [href]="[loggedInUrl]">
+      <a routerLink="{{loggedInUrl}}">
         <span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
         <span class="title">{{loggedIn}}</span>
       </a>

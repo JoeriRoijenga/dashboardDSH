@@ -14,10 +14,10 @@ export class MenuComponent implements OnInit {
     private authService: AuthService
   ) {
     this.loggedIn = "Logout";
-    this.loggedInUrl = "/logout"
+    this.loggedInUrl = "logout"
     if (!this.authService.isLoggedIn()) {
       this.loggedIn = "Login";
-      this.loggedInUrl = "/login"
+      this.loggedInUrl = "login"
     }
   }
 

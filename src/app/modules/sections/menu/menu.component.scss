@@ -18,12 +18,15 @@
   z-index: 1;
   top: 0px;
 }
-.navigation:hover,
-.navigation.active
-{
-  width: 300px;
-  //z-index: 1000;
+
+@media (hover: hover) and (pointer: fine) {
+  .navigation:hover,
+  .navigation.active
+  {
+    width: 300px;
+  }
 }
+
 .navigation ul
 {
   position: absolute;
