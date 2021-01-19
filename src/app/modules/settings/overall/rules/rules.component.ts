@@ -4,7 +4,6 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-rules',
   templateUrl: './rules.component.html',
   styleUrls: [
-    './rules.component.scss',
     './../../settings.component.scss'
   ]
 })

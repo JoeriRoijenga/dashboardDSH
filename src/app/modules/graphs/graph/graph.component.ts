@@ -1,13 +1,12 @@
 import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { GraphsService } from 'src/app/services/graphs.service';
-import * as CanvasJS from "src/assets/canvasjs-3.2.6/canvasjs.min.js";
+import * as CanvasJS from "./canvasjs.min.js";
 
 @Component({
   selector: 'app-graph',
   templateUrl: './graph.component.html',
   styleUrls: [
-    './graph.component.scss',
     './../graphs.component.scss',
   ]
 })

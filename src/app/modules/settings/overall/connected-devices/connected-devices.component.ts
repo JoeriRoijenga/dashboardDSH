@@ -5,7 +5,6 @@ import { SettingsService } from 'src/app/services/settings.service';
   selector: 'app-connected-devices',
   templateUrl: './connected-devices.component.html',
   styleUrls: [
-    './connected-devices.component.scss',
     './../../settings.component.scss'
   ]
 })

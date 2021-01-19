@@ -9,32 +9,6 @@
   }
 }
 
-// @media only screen and (max-width: 1600px) {
-//   .flex-container {
-//     .sensor {
-//       width: 50%;
-//       margin: 0px 10px 10px 10px;
-//     }
-//   }
-// }
-
-// @media only screen and (max-width: 1100px) {
-//   .flex-container {
-//     .sensor {
-//       width: 100%;
-//       margin: 0px 10px 10px 10px;
-//     }
-//   }
-// }
-
-// @media only screen and (max-width: 500px) {
-//   .flex-container {
-//     .sensor {
-//       width: 82%;
-//     }
-//   }
-// }
-
 @media only screen and (max-width: 320px) {
   .flex-container {
     .sensor {
@@ -57,7 +31,7 @@
   .flex-container {
     .sensor {
       width: 32%;
-      margin: 0px 5px 0px 0px;
+      margin: 0px 4px 5px 8px;
     }
   }
 }

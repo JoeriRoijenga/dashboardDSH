@@ -5,7 +5,6 @@ import { SettingsService } from 'src/app/services/settings.service';
   selector: 'app-notifications',
   templateUrl: './notifications.component.html',
   styleUrls: [
-    './notifications.component.scss',
     './../../settings.component.scss'
   ]
 })
