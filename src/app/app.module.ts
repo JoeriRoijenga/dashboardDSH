@@ -16,7 +16,8 @@ import { SettingsModule } from './modules/settings/settings.module';
 import { HomeComponent } from './modules/home/home.component';
 import { GraphsComponent } from "./modules/graphs/graphs.component";
 import { GraphComponent } from './modules/graphs/graph/graph.component';
-// import * as CanvasJS from "canvasjs";
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { GraphComponent } from './modules/graphs/graph/graph.component';
       BrowserAnimationsModule,
       MatDialogModule,
       SettingsModule,
+      ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     {
