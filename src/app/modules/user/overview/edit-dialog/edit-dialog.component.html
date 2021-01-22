@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Add user to system</h1>
+<h1 mat-dialog-title> edit user from system</h1>
 <div class="jumbotron">
   <div class="container">
     <form [formGroup]="registerForm">
@@ -47,35 +47,34 @@
             </select>
           </mat-form-field>
         </dt>
-        <dt>
-          <mat-form-field>
-            <label>
-              <input   matInput type="password" placeholder="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && registerForm.errors }" />
-              <div *ngIf="submitted && registerForm.errors" class="invalid-feedback">
-                <div *ngIf="error.password.errors.required">Password is required</div>
-                <div *ngIf="error.password.errors.minlength">Password must be at least 6 characters</div>
-              </div>
-            </label>
-          </mat-form-field>
-        </dt>
-        <dt>
-          <mat-form-field>
-            <label>
-              <input matInput type="password" placeholder="repeat password" formControlName="confirmPassword"[ngClass]="{ 'is-invalid': submitted && registerForm.errors }" />
-              <div *ngIf="submitted && registerForm.errors" class="invalid-feedback">
-                <div *ngIf="error.confirmPassword.errors.required">Confirm Password is required</div>
-                <div *ngIf="error.confirmPassword.errors.checkPWD">Passwords must match</div>
-              </div>
-            </label>
-          </mat-form-field>
-        </dt>
+<!--        <dt>-->
+<!--          <mat-form-field>-->
+<!--            <label>-->
+<!--              <input   matInput type="password" placeholder="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && registerForm.errors }" />-->
+<!--              <div *ngIf="submitted && registerForm.errors" class="invalid-feedback">-->
+<!--                <div *ngIf="error.password.errors.required">Password is required</div>-->
+<!--                <div *ngIf="error.password.errors.minlength">Password must be at least 6 characters</div>-->
+<!--              </div>-->
+<!--            </label>-->
+<!--          </mat-form-field>-->
+<!--        </dt>-->
+<!--        <dt>-->
+<!--          <mat-form-field>-->
+<!--            <label>-->
+<!--              <input matInput type="password" placeholder="repeat password" formControlName="confirmPassword"[ngClass]="{ 'is-invalid': submitted && registerForm.errors }" />-->
+<!--              <div *ngIf="submitted && registerForm.errors" class="invalid-feedback">-->
+<!--                <div *ngIf="error.confirmPassword.errors.required">Confirm Password is required</div>-->
+<!--                <div *ngIf="error.confirmPassword.errors.checkPWD">Passwords must match</div>-->
+<!--              </div>-->
+<!--            </label>-->
+<!--          </mat-form-field>-->
+<!--        </dt>-->
       </dl>
 
       <mat-dialog-actions>
-      <!--    <button class="close-button"(click)="close()">Close</button>-->
+        <!--    <button class="close-button"(click)="close()">Close</button>-->
         <button class="save-button btn btn-primary"(click)="save()">Save</button>
       </mat-dialog-actions>
-      </form>
-    </div>
+    </form>
+  </div>
 </div>
-

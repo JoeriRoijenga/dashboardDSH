@@ -7,14 +7,16 @@
       <tr>
         <th>Name</th>
         <th>Email</th>
-        <th>admin rights</th>
-        <th></th>
+        <th>Admin rights</th>
+        <th>Remove</th>
+        <th>Edit</th>
       </tr>
       <tr *ngFor="let user of users">
         <td>{{user.name}}</td>
         <td>{{user.mail}}</td>
         <td>{{user.admin ? '&#10003;' : '&#10005;'}}</td>
-        <td><button class="remove-button"(click)="removeUser()"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+        <td><button class="remove-button"(click)="removeUser(user.id)"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+        <td><button class="edit-button"(click)="editUser(user.id)"><i class="fa fa-pencil" aria-hidden="true"></i></button> </td>
       </tr>
 
   </table>

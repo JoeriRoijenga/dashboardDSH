@@ -140,4 +140,11 @@ export class AuthService {
   public getUser(id: number): Observable<any> {
     return this.http.get(`${environment.urlAPI}/users/get/${id}`);
   }
+  public deleteUser(id: number): Observable<any> {
+    return this.http.delete(`${environment.urlAPI}/users/delete/${id}`);
+  }
+
+  public updateUser(id: number,name: string, mail:string, admin: boolean): Observable<any> {
+    return this.http.put(`${environment.urlAPI}/users/update/${id}`, {name: name, mail: mail, admin: admin});
+  }
 }

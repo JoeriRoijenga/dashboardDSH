@@ -31,7 +31,9 @@
     "http-server": "^0.12.3",
     "mime": "^2.4.6",
     "moment": "^2.29.1",
+    "parse5-htmlparser2-tree-adapter": "^6.0.1",
     "rxjs": "~6.6.0",
+    "schema-utils": "^2.7.1",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },
