@@ -39,15 +39,9 @@ export class DialogComponent implements OnInit{
 
   }
 
-  // changeRights(e){
-  //   this.adminrights.setValue(e.target.value,{onlySelf: true})
-  // }
-
   ngOnInit(): void {
-    console.log("öninit")
     this.registerForm = this.formbuilder.group({
       name: ['', Validators.required],
-      // lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       admin: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(4)]],
@@ -55,8 +49,6 @@ export class DialogComponent implements OnInit{
     }, {
       validators: MustMatch('password', 'confirmPassword')
     });
-    console.log("registerform:")
-    console.log(this.registerForm);
   }
 
 
@@ -65,10 +57,7 @@ export class DialogComponent implements OnInit{
 
   save(): void{
     this.submitted = true;
-
-    // let name = this.registerForm.value.firstName + " " + this.registerForm.value.lastName;
-
-    console.log(this.selected);
+    
     if (this.registerForm.invalid){
       return;
     }

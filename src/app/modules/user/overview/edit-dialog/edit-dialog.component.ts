@@ -53,7 +53,6 @@ export class EditDialogComponent implements OnInit{
   ngOnInit(): void {
 
     this.registerForm = this.formbuilder.group({
-      // firstName: ['', Validators.required],
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       admin: ['', Validators.required],
@@ -62,8 +61,6 @@ export class EditDialogComponent implements OnInit{
     }, {
       validators: MustMatch('password', 'confirmPassword')
     });
-    console.log("registerform:")
-    console.log(this.registerForm);
   }
 
 
@@ -73,9 +70,6 @@ export class EditDialogComponent implements OnInit{
   save(): void{
     this.submitted = true;
 
-    // let name = this.registerForm.value.firstName + " " + this.registerForm.value.lastName;
-
-    console.log(this.selected);
     if (this.registerForm.invalid){
       return;
     }
