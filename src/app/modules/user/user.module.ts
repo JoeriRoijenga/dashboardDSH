@@ -7,6 +7,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { LogoutComponent } from './logout/logout.component';
+import {MatOptionModule} from "@angular/material/core";
+import { EditDialogComponent } from './overview/edit-dialog/edit-dialog.component';
 
 
 @NgModule({
@@ -14,16 +16,18 @@ import { LogoutComponent } from './logout/logout.component';
     LoginComponent,
     OverviewComponent,
     DialogComponent,
-    LogoutComponent
+    LogoutComponent,
+    EditDialogComponent
 
   ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    CommonModule,
-    FormsModule,
-    MatDialogModule,
-    MatInputModule
-  ]
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        CommonModule,
+        FormsModule,
+        MatDialogModule,
+        MatInputModule,
+        MatOptionModule
+    ]
 })
 export class UserModule { }

@@ -75,47 +75,21 @@ th {
   background: none;
   display: flex;
   border: none;
-  //justify-content: center;
-  //border-radius: 4px;
-  //border: none;
-  //color: black;
-  //text-align: center;
   font-size:20px;
-  //padding: 20px;
-  //width: 75px;
-  //margin: 2px;
-  //transition: all 0.5s;
   cursor: pointer;
 }
 .remove-button:hover{
   color: red;
 }
 
-//.remove-button span {
-//  cursor: pointer;
-//  display: inline-block;
-//  position: relative;
-//  transition: 0.5s;
-//}
-//
-//.remove-button:hover {
-//  background-color: #FF2725;
-//}
-//
-//.remove-button span:after {
-//  content: '\002D';
-//  position: absolute;
-//  opacity: 0;
-//  top: 0;
-//  right: -25px;
-//  transition: 0.5s;
-//}
-//
-//.remove-button:hover span {
-//  padding-right: 20px;
-//}
-//
-//.remove-button:hover span:after {
-//  opacity: 1;
-//  right: 0;
-//}
+.edit-button{
+  background: none;
+  display: flex;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  //color: black;
+}
+.edit-button:hover{
+  color: dimgrey;
+}
