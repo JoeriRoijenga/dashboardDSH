@@ -52,8 +52,8 @@ export class DialogComponent implements OnInit{
   ngOnInit(): void {
     console.log("öninit")
     this.registerForm = this.formbuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      name: ['', Validators.required],
+      // lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       admin: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(4)]],
@@ -72,14 +72,14 @@ export class DialogComponent implements OnInit{
   save(): void{
     this.submitted = true;
 
-    let name = this.registerForm.value.firstName + " " + this.registerForm.value.lastName;
+    // let name = this.registerForm.value.firstName + " " + this.registerForm.value.lastName;
 
     console.log(this.selected);
     if (this.registerForm.invalid){
       return;
     }
 
-    this.authService.create_user(name, this.registerForm.value.password, this.registerForm.value.email, Boolean(this.selected)).subscribe();
+    this.authService.create_user(this.registerForm.value.name, this.registerForm.value.password, this.registerForm.value.email, Boolean(this.selected)).subscribe();
     this.dialogRef.close();
   }
   close(): void{

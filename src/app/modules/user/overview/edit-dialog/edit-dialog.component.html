@@ -6,27 +6,27 @@
         <dt>
           <mat-form-field>
             <label>
-              <input   matInput type="text" placeholder="first name" formControlName="firstName"[ngClass]="{ 'is-invalid': submitted && registerForm.errors }" />
+              <input matInput type="text" placeholder="name" formControlName="name" [ngClass]="{ 'is-invalid': submitted && registerForm.errors }" value="{{name}}" />
               <div *ngIf="submitted && error.lastName.errors" class="invalid-feedback">
-                <div *ngIf=" error.firstName.errors.required">First Name is required</div>
+                <div *ngIf=" error.name.errors.required">Name is required</div>
               </div>
             </label>
           </mat-form-field>
         </dt>
-        <dt>
+        <!-- <dt>
           <mat-form-field>
             <label>
-              <input  matInput type="text" placeholder="last name" formControlName="lastName"[ngClass]="{ 'is-invalid': submitted && registerForm.errors }" />
+              <input  matInput type="text" placeholder="last name" formControlName="lastName"[ngClass]="{ 'is-invalid': submitted && registerForm.errors }" value="{{name}}" />
               <div *ngIf="submitted && registerForm.errors" class="invalid-feedback">
                 <div *ngIf="error.lastName.errors.required">Last Name is required</div>
               </div>
             </label>
           </mat-form-field>
-        </dt>
+        </dt> -->
         <dt>
           <mat-form-field>
             <label>
-              <input  matInput type="text" placeholder="email" formControlName="email" class="from-control" [ngClass]="{ 'is-invalid': submitted && registerForm.errors }" />
+              <input  matInput type="text" placeholder="email" formControlName="email" class="from-control" [ngClass]="{ 'is-invalid': submitted && registerForm.errors }" value="{{mail}}" />
               <div *ngIf="submitted && registerForm.errors" class="invalid-feedback">
                 <div *ngIf="error.email.errors.required">Email is required</div>
                 <div *ngIf="error.email.errors.email">Email must be a valid email address</div>
@@ -38,7 +38,7 @@
           <mat-form-field>
             <mat-label>admin rights?</mat-label>
             <select matNativeControl required formControlName="admin" [(ngModel)]="selected" [ngClass]="{'is-invalid': submitted && registerForm.errors }" >
-              <option *ngFor="let right of adminrights" [value]="right.value">
+              <option *ngFor="let right of adminrights" [value]="right.value"  [selected]="right == admin" >
                 {{right.viewValue}}
               </option>
               <div *ngIf="submitted && registerForm.errors" class="invalid-feedback">

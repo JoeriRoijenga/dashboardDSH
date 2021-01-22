@@ -6,14 +6,14 @@
         <dt>
           <mat-form-field>
             <label>
-              <input   matInput type="text" placeholder="first name" formControlName="firstName"[ngClass]="{ 'is-invalid': submitted && registerForm.errors }" />
+              <input   matInput type="text" placeholder="name" formControlName="name" [ngClass]="{ 'is-invalid': submitted && registerForm.errors }" />
               <div *ngIf="submitted && error.lastName.errors" class="invalid-feedback">
-                <div *ngIf=" error.firstName.errors.required">First Name is required</div>
+                <div *ngIf=" error.name.errors.required">name Name is required</div>
               </div>
             </label>
           </mat-form-field>
         </dt>
-        <dt>
+        <!-- <dt>
           <mat-form-field>
             <label>
               <input  matInput type="text" placeholder="last name" formControlName="lastName"[ngClass]="{ 'is-invalid': submitted && registerForm.errors }" />
@@ -22,7 +22,7 @@
               </div>
             </label>
           </mat-form-field>
-        </dt>
+        </dt> -->
         <dt>
           <mat-form-field>
             <label>

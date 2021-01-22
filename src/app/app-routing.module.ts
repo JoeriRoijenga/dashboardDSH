@@ -13,19 +13,17 @@ const routes: Routes = [
   { path: '', canActivate: [NotLoggedInGuard], children: [
       { path: '', component: HomeComponent },
       { path: 'login', component: LoginComponent },
+      { path: 'admin', component: OverviewComponent },
     ]
   },
 
   { path: '', canActivate: [LoggedInGuard], children: [
-      { path: 'admin', component: OverviewComponent },
+      // { path: 'admin', component: OverviewComponent },
       { path: 'settings', component: SettingsComponent },
       { path: 'graphs', component: GraphsComponent },
       { path: 'logout', component: LogoutComponent },
     ]
   },
-
-  // { path: 'admin', component: OverviewComponent },
-
 ];
 
 @NgModule({

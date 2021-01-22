@@ -31,10 +31,14 @@ export class EditDialogComponent implements OnInit{
   public ID: number;
   get fu() {return this.registerForm.controls; }
 
-  adminrights: AdminSelect[]= [
+  adminrights: AdminSelect[] = [
     {value: true, viewValue: 'admin rights'},
     {value: false, viewValue: 'no admin rights'}
   ];
+
+  public name: string;
+  public mail: string;
+  public admin: boolean;
 
   constructor(
     private http: HttpClient,
@@ -42,8 +46,10 @@ export class EditDialogComponent implements OnInit{
     private authService: AuthService,
     private dialogRef: MatDialogRef<EditDialogComponent>,
     private formbuilder: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) data){ dialogRef.disableClose = false;
-  //@Inject(MAT_DIALOG_DATA) data: Userdata{any}){ dialogRef.disableClose = false;
+    @Inject(MAT_DIALOG_DATA) data
+  ) { 
+    dialogRef.disableClose = false;
+    //@Inject(MAT_DIALOG_DATA) data: Userdata{any}){ dialogRef.disableClose = false;
   }
 
   // changeRights(e){
@@ -53,8 +59,8 @@ export class EditDialogComponent implements OnInit{
   ngOnInit(): void {
 
     this.registerForm = this.formbuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      // firstName: ['', Validators.required],
+      name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       admin: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(4)]],
@@ -73,14 +79,14 @@ export class EditDialogComponent implements OnInit{
   save(): void{
     this.submitted = true;
 
-    let name = this.registerForm.value.firstName + " " + this.registerForm.value.lastName;
+    // let name = this.registerForm.value.firstName + " " + this.registerForm.value.lastName;
 
     console.log(this.selected);
     if (this.registerForm.invalid){
       return;
     }
 
-    this.authService.updateUser( this.ID ,name , this.registerForm.value.email, Boolean(this.selected)).subscribe();
+    this.authService.updateUser( this.ID ,  this.registerForm.value.name, this.registerForm.value.email, Boolean(this.selected)).subscribe();
     this.dialogRef.close();
   }
   close(): void{
