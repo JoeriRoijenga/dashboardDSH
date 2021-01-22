@@ -1,15 +1,9 @@
-import { Component, OnInit, Inject, Input, Output, EventEmitter} from '@angular/core';
-import {MatDialog, MatDialogRef, MatDialogConfig, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {DialogData} from '../overview.component';
-import {FormBuilder, FormGroup, FormControl, Validators,ReactiveFormsModule, Form} from '@angular/forms';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../../../environments/environment';
-import {Router} from '@angular/router';
-import { Directive, Attribute  } from '@angular/core';
-import { Validator,  NG_VALIDATORS } from '@angular/forms';
-import validate = WebAssembly.validate;
+import { Router } from '@angular/router';
 import { AuthService } from '../../../../services/auth.service';
-import {passBoolean} from "protractor/built/util";
 
 interface AdminSelect{
   value: boolean,
@@ -89,10 +83,10 @@ export class EditDialogComponent implements OnInit{
     this.authService.updateUser( this.ID ,  this.registerForm.value.name, this.registerForm.value.email, Boolean(this.selected)).subscribe();
     this.dialogRef.close();
   }
+
   close(): void{
     this.dialogRef.close();
   }
-
 
 }
 
