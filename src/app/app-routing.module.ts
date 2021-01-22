@@ -22,7 +22,10 @@ const routes: Routes = [
       { path: 'graphs', component: GraphsComponent },
       { path: 'logout', component: LogoutComponent },
     ]
-  }
+  },
+
+  // { path: 'admin', component: OverviewComponent },
+
 ];
 
 @NgModule({
