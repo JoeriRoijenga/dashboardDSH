@@ -4,7 +4,6 @@ import { SettingsComponent } from './settings.component';
 import { OverallModule } from './overall/overall.module';
 import { SensorsModule } from './sensors/sensors.module';
 
-
 @NgModule({
   declarations: [
     SettingsComponent,

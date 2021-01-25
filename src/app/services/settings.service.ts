@@ -96,4 +96,31 @@ export class SettingsService {
       })
     ));
   }
+
+  public addRule(sensor_id: number, type: string, value: string, response: boolean, actuator_id: number): Observable<boolean> {
+    return this.http.post( `${environment.urlAPI}/settings/add/rules`, {sensors_id: sensor_id, type: type, value: value, respond_value: response, actuators_id: actuator_id}).pipe(
+      mapTo(true),
+      catchError(error => {
+        return of(false);
+      })
+    );
+  }
+
+  public editRule(id: number, sensor_id: number, type: string, value: string, response: boolean, actuator_id: number): Observable<boolean> {
+    return this.http.post( `${environment.urlAPI}/settings/edit/rules/${id}`, {sensors_id: sensor_id, type: type, value: value, respond_value: response, actuators_id: actuator_id}).pipe(
+      mapTo(true),
+      catchError(error => {
+        return of(false);
+      })
+    );
+  }
+
+  public deleteRule(id: number): Observable<boolean> {
+    return this.http.post( `${environment.urlAPI}/settings/delete/rules/${id}`, {}).pipe(
+      mapTo(true),
+      catchError(error => {
+        return of(false);
+      })
+    );
+  }
 }

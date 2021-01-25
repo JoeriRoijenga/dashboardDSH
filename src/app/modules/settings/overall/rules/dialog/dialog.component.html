@@ -1,0 +1,85 @@
+<h1 mat-dialog-title>Add rule</h1>
+<div class="jumbotron">
+  <div class="container">
+    <form [formGroup]="rulesForm">
+      <dl>
+        <dt>
+          <mat-label>If</mat-label>
+        </dt>
+
+        <dt>
+          <mat-form-field>
+            <select matNativeControl required formControlName="sensors" [ngClass]="{'is-invalid': submitted && rulesForm.errors }" >
+              <option *ngFor="let sensor of sensors" [value]="sensor.id">
+                {{sensor.text}}
+              </option>
+              <div *ngIf="submitted && rulesForm.errors" class="invalid-feedback">
+                <div *ngIf="error.sensors.errors.required">Is required</div>
+              </div>
+            </select>
+          </mat-form-field>
+        </dt>
+
+        <dt>
+          <mat-form-field>
+            <select matNativeControl required formControlName="types" [ngClass]="{'is-invalid': submitted && rulesForm.errors }" >
+              <option *ngFor="let type of types" [value]="type.value">
+                {{type.value}}
+              </option>
+              <div *ngIf="submitted && rulesForm.errors" class="invalid-feedback">
+                <div *ngIf="error.types.errors.required">Is required</div>
+              </div>
+            </select>
+          </mat-form-field>
+        </dt>
+
+        <dt>
+          <mat-form-field>
+            <label>
+              <input matInput type="text" placeholder="value" formControlName="value" [ngClass]="{ 'is-invalid': submitted && rulesForm.errors }" />
+              <div *ngIf="submitted && error.lastName.errors" class="invalid-feedback">
+                <div *ngIf="error.value.errors.required">Value</div>
+              </div>
+            </label>
+          </mat-form-field>
+        </dt>
+
+        <dt>
+          <mat-form-field>
+            <mat-label>Then</mat-label>
+          </mat-form-field>
+        </dt>
+
+        <dt>
+          <mat-form-field>
+            <select matNativeControl required formControlName="responses" [ngClass]="{'is-invalid': submitted && rulesForm.errors }" >
+              <option *ngFor="let response of responses" [value]="response.value">
+                {{response.text}}
+              </option>
+              <div *ngIf="submitted && rulesForm.errors" class="invalid-feedback">
+                <div *ngIf="error.responses.errors.required">Is required</div>
+              </div>
+            </select>
+          </mat-form-field>
+        </dt>
+
+        <dt>
+          <mat-form-field>
+            <select matNativeControl required formControlName="actuators" [ngClass]="{'is-invalid': submitted && rulesForm.errors }" >
+              <option *ngFor="let actuator of actuators" [value]="actuator.id">
+                {{actuator.text}}
+              </option>
+              <div *ngIf="submitted && rulesForm.errors" class="invalid-feedback">
+                <div *ngIf="error.actuators.errors.required">Is required</div>
+              </div>
+            </select>
+          </mat-form-field>
+        </dt>
+      </dl>
+
+      <mat-dialog-actions>
+        <button class="save-button btn btn-primary"(click)="save()">Save</button>
+      </mat-dialog-actions>
+    </form>
+  </div>
+</div>
