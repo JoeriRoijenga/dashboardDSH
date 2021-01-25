@@ -28,7 +28,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
   ],
   exports: [
-    OverallComponent
+    OverallComponent,
   ]
 })
 export class OverallModule { }

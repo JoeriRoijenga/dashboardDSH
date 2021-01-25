@@ -53,6 +53,16 @@ export class SettingsService {
     ));
   }
 
+  public getAllSensors(): Observable<any> {
+    return this.http.get(`${environment.urlAPI}/settings/get/sensors`, {}).pipe(
+      tap(() => {},
+      catchError(error => {
+        console.log(error.error);
+        return of(false);
+      })
+    ));
+  }
+
   public getSensorTypes(): Observable<any> {
     return this.http.get(`${environment.urlAPI}/settings/get/sensor/types`, {}).pipe(
       tap((response) => {
@@ -67,9 +77,7 @@ export class SettingsService {
 
   public getSensorTypeNotificationSettings(type: number): Observable<any> {
     return this.http.get(`${environment.urlAPI}/settings/get/sensor/type/notifications/${type}`, {}).pipe(
-      tap((response) => {
-        
-      },
+      tap(() => {},
       catchError(error => {
         console.log(error.error);
         return of(false);
@@ -87,9 +95,7 @@ export class SettingsService {
 
   public getActuators(): Observable<any> {
     return this.http.get(`${environment.urlAPI}/settings/get/actuators`, {}).pipe(
-      tap((response) => {
-        
-      },
+      tap(() => {},
       catchError(error => {
         console.log(error.error);
         return of(false);
@@ -97,8 +103,15 @@ export class SettingsService {
     ));
   }
 
-  public addRule(sensor_id: number, type: string, value: string, response: boolean, actuator_id: number): Observable<boolean> {
-    return this.http.post( `${environment.urlAPI}/settings/add/rules`, {sensors_id: sensor_id, type: type, value: value, respond_value: response, actuators_id: actuator_id}).pipe(
+  public addRule(sensor_id: string, type: string, value: number, response: boolean, actuator_id: string): Observable<boolean> {
+    return this.http.post( `${environment.urlAPI}/settings/add/rules`, {
+      "sensors_id": sensor_id,
+      "type": type,
+      "value": value,
+      "respond_value": response,
+      "actuators_id": actuator_id
+    }
+    ).pipe(
       mapTo(true),
       catchError(error => {
         return of(false);
@@ -122,5 +135,15 @@ export class SettingsService {
         return of(false);
       })
     );
+  }
+
+  public getRules(): Observable<any> {
+    return this.http.get( `${environment.urlAPI}/settings/get/rules`, {}).pipe(
+      tap(() => {},
+      catchError(error => {
+        console.log(error.error);
+        return of(false);
+      })
+    ));
   }
 }

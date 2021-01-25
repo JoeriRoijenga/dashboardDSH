@@ -22,7 +22,6 @@ import { EditDialogComponent } from './overview/edit-dialog/edit-dialog.componen
     imports: [
         CommonModule,
         ReactiveFormsModule,
-        CommonModule,
         FormsModule,
         MatDialogModule,
         MatInputModule,

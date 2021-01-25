@@ -35,8 +35,10 @@ export class DialogComponent implements OnInit{
     private authService: AuthService,
     private dialogRef: MatDialogRef<DialogComponent>,
     private formbuilder: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) data){ dialogRef.disableClose = false;
-
+    @Inject(MAT_DIALOG_DATA) data
+  ) {
+    dialogRef.disableClose = false;
+    // console.log(data);
   }
 
   ngOnInit(): void {

@@ -5,12 +5,10 @@
       <dl>
         <dt>
           <mat-label>If</mat-label>
-        </dt>
 
-        <dt>
           <mat-form-field>
-            <select matNativeControl required formControlName="sensors" [ngClass]="{'is-invalid': submitted && rulesForm.errors }" >
-              <option *ngFor="let sensor of sensors" [value]="sensor.id">
+            <select matNativeControl required formControlName="sensors" [(ngModel)]="chosenSensor" [ngClass]="{'is-invalid': submitted && rulesForm.errors }" >
+              <option *ngFor="let sensor of sensors" [value]="sensor.id" [selected]="sensor.id == chosenSensor">
                 {{sensor.text}}
               </option>
               <div *ngIf="submitted && rulesForm.errors" class="invalid-feedback">
@@ -18,12 +16,10 @@
               </div>
             </select>
           </mat-form-field>
-        </dt>
 
-        <dt>
           <mat-form-field>
-            <select matNativeControl required formControlName="types" [ngClass]="{'is-invalid': submitted && rulesForm.errors }" >
-              <option *ngFor="let type of types" [value]="type.value">
+            <select matNativeControl required formControlName="types" [(ngModel)]="chosenType" [ngClass]="{'is-invalid': submitted && rulesForm.errors }" >
+              <option *ngFor="let type of types" [value]="type.value" [selected]="type.value == chosenType">
                 {{type.value}}
               </option>
               <div *ngIf="submitted && rulesForm.errors" class="invalid-feedback">
@@ -31,29 +27,21 @@
               </div>
             </select>
           </mat-form-field>
-        </dt>
 
-        <dt>
           <mat-form-field>
             <label>
               <input matInput type="text" placeholder="value" formControlName="value" [ngClass]="{ 'is-invalid': submitted && rulesForm.errors }" />
-              <div *ngIf="submitted && error.lastName.errors" class="invalid-feedback">
+              <div *ngIf="submitted && error.value.errors" class="invalid-feedback">
                 <div *ngIf="error.value.errors.required">Value</div>
               </div>
             </label>
           </mat-form-field>
-        </dt>
-
-        <dt>
+        
+          <mat-label>Then</mat-label>
+        
           <mat-form-field>
-            <mat-label>Then</mat-label>
-          </mat-form-field>
-        </dt>
-
-        <dt>
-          <mat-form-field>
-            <select matNativeControl required formControlName="responses" [ngClass]="{'is-invalid': submitted && rulesForm.errors }" >
-              <option *ngFor="let response of responses" [value]="response.value">
+            <select matNativeControl required formControlName="responses" [(ngModel)]="chosenReponse" [ngClass]="{'is-invalid': submitted && rulesForm.errors }" >
+              <option *ngFor="let response of responses" [value]="response.value" [selected]="response.text == chosenReponse">
                 {{response.text}}
               </option>
               <div *ngIf="submitted && rulesForm.errors" class="invalid-feedback">
@@ -61,12 +49,10 @@
               </div>
             </select>
           </mat-form-field>
-        </dt>
-
-        <dt>
+        
           <mat-form-field>
-            <select matNativeControl required formControlName="actuators" [ngClass]="{'is-invalid': submitted && rulesForm.errors }" >
-              <option *ngFor="let actuator of actuators" [value]="actuator.id">
+            <select matNativeControl required formControlName="actuators" [(ngModel)]="chosenActuator" [ngClass]="{'is-invalid': submitted && rulesForm.errors }" >
+              <option *ngFor="let actuator of actuators" [value]="actuator.id" [selected]="actuator.id == chosenActuator">
                 {{actuator.text}}
               </option>
               <div *ngIf="submitted && rulesForm.errors" class="invalid-feedback">

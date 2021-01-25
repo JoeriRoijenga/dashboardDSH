@@ -10,6 +10,10 @@ import { SettingsService } from 'src/app/services/settings.service';
 })
 export class DialogComponent implements OnInit {
   public rulesForm: FormGroup;
+  public chosenSensor = null;
+  public chosenActuator = null;
+  public chosenType = null;
+  public chosenReponse = null;
   public submitted = false;
 
   public types = [
@@ -32,6 +36,27 @@ export class DialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) data
   ) { 
     dialogRef.disableClose = false;
+    
+    this.settingsService.getAllSensors().subscribe(response => {
+      for (let sensor of response.sensors) {
+        if (this.chosenSensor ==  null) {
+          this.chosenSensor = sensor.id;
+        }
+        this.sensors.push({id: sensor.id, text: sensor.name});        
+      }
+    });
+
+    this.settingsService.getActuators().subscribe(response => {
+      for (let actuator of response.actuators) {
+        if (this.chosenActuator ==  null) {
+          this.chosenActuator = actuator.id;
+        }
+        this.actuators.push({id: actuator.id, text: actuator.name});        
+      }
+    });
+
+    this.chosenReponse = this.responses[0].value;
+    this.chosenType = this.types[0].value;
   }
 
   ngOnInit(): void {
@@ -49,13 +74,11 @@ export class DialogComponent implements OnInit {
   get error() {return this.rulesForm.controls; }
 
   save(): void{
-    this.submitted = true;
-
     if (this.rulesForm.invalid){
       return;
     }
 
-    this.settingsService.addRule(this.rulesForm.value.sensors, this.rulesForm.value.types, this.rulesForm.value.value, Boolean(this.rulesForm.value.responses), this.rulesForm.value.actuators);
+    this.settingsService.addRule(this.chosenSensor, this.chosenType, Number(this.rulesForm.value.value), Boolean(this.chosenReponse), this.chosenActuator).subscribe();
     this.dialogRef.close();
   }
 

@@ -6,13 +6,10 @@
   <div class="rules-table">
     <table>
       <tr>
-        <th>Name</th>
+        <th>Description</th>
       </tr>
-      <tr>
-        <td>If > 20˚ then open W1</td>
-      </tr>
-      <tr>
-        <td>If > 80% then open D1</td>
+      <tr *ngFor="let rule of rules">
+        <td (click)="openEditRule(rule.id)">If {{rule.sensor_name}} {{rule.type}} {{rule.value}} then {{rule.respond_value}} {{rule.actuator_name}}</td>
       </tr>
     </table>
   </div>
