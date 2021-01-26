@@ -103,7 +103,7 @@ export class SettingsService {
     ));
   }
 
-  public addRule(sensor_id: string, type: string, value: number, response: boolean, actuator_id: string): Observable<boolean> {
+  public addRule(sensor_id: string, type: string, value: number, response: number, actuator_id: string): Observable<boolean> {
     return this.http.post( `${environment.urlAPI}/settings/add/rules`, {
       "sensors_id": sensor_id,
       "type": type,
@@ -119,8 +119,8 @@ export class SettingsService {
     );
   }
 
-  public editRule(id: number, sensor_id: number, type: string, value: string, response: boolean, actuator_id: number): Observable<boolean> {
-    return this.http.post( `${environment.urlAPI}/settings/edit/rules/${id}`, {sensors_id: sensor_id, type: type, value: value, respond_value: response, actuators_id: actuator_id}).pipe(
+  public editRule(id: number, sensor_id: number, type: string, value: number, response: number, actuator_id: number): Observable<boolean> {
+    return this.http.put( `${environment.urlAPI}/settings/edit/rules/${id}`, {sensors_id: sensor_id, type: type, value: value, respond_value: response, actuators_id: actuator_id}).pipe(
       mapTo(true),
       catchError(error => {
         return of(false);
@@ -129,7 +129,7 @@ export class SettingsService {
   }
 
   public deleteRule(id: number): Observable<boolean> {
-    return this.http.post( `${environment.urlAPI}/settings/delete/rules/${id}`, {}).pipe(
+    return this.http.delete( `${environment.urlAPI}/settings/delete/rules/${id}`, {}).pipe(
       mapTo(true),
       catchError(error => {
         return of(false);
@@ -139,6 +139,16 @@ export class SettingsService {
 
   public getRules(): Observable<any> {
     return this.http.get( `${environment.urlAPI}/settings/get/rules`, {}).pipe(
+      tap(() => {},
+      catchError(error => {
+        console.log(error.error);
+        return of(false);
+      })
+    ));
+  }
+
+  public getRule(id: number): Observable<any> {
+    return this.http.get( `${environment.urlAPI}/settings/get/rule/${id}`, {}).pipe(
       tap(() => {},
       catchError(error => {
         console.log(error.error);
