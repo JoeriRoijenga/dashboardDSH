@@ -53,12 +53,6 @@ export class OverviewComponent implements OnInit {
   );
   }
 
-  removeUser(id: number): void{
-    this.authService.deleteUser(id).subscribe(() => {
-      this.getUsers();
-    });
-  }
-
   openAddUser(): void{
    const dialogConfig = new MatDialogConfig();
 

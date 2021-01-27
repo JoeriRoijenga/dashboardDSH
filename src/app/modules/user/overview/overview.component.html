@@ -6,13 +6,11 @@
         <th>Name</th>
         <th>Email</th>
         <th>Admin</th>
-        <th>Remove</th>
       </tr>
       <tr *ngFor="let user of users" (click)="editUser(user.id)">
         <td>{{user.name}}</td>
         <td>{{user.mail}}</td>
         <td>{{user.admin ? '&#10003;' : '&#10005;'}}</td>
-        <td><button class="remove-button" (click)="removeUser(user.id)"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
       </tr>
 
   </table>
