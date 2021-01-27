@@ -6,7 +6,7 @@ table {
     background: aliceblue;
     padding: 10px 80px;
   }
-  
+
   th {
     background: #459cdd;
     color: black;
@@ -71,14 +71,14 @@ table {
 }
 
 .offset-left{
-  position: relative; 
-  left: 70px; 
+  position: relative;
+  left: 70px;
   width: 95%;
 }
 
 @media only screen and (max-width: 1366px) {
   table {
-    width: 99%; 
+    width: 99%;
   }
   .offset-left {
     width: 94%;
@@ -87,7 +87,7 @@ table {
 
 @media only screen and (max-width: 1112px) {
   table {
-    width: 99%; 
+    width: 99%;
   }
   .offset-left {
     width: 90%;
@@ -96,7 +96,10 @@ table {
 
 @media only screen and (max-width: 1024px) {
   table {
-    width: 99%; 
+    width: 99%;
+  }
+  .userTable {
+    display: block;
   }
   .offset-left {
     width: 90%;
@@ -105,25 +108,27 @@ table {
 
 @media only screen and (max-width: 730px) {
   table {
-    width: 99%; 
+    width: 99%;
   }
   .offset-left {
     width: 90%;
   }
   .userTable {
     overflow: scroll;
+    display: block;
   }
 }
 
 @media only screen and (max-width: 414px) {
   table {
-    width: 99%; 
+    width: 99%;
   }
   .offset-left {
     width: 74%;
   }
   .userTable {
     overflow: scroll;
+    display: block;
   }
 }
 
