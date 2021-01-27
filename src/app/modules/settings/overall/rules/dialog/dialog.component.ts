@@ -21,6 +21,7 @@ export class DialogComponent implements OnInit {
   public chosenValue = "";
   public edit = false;
   public id: number;
+  public title: string;
 
   public types = [
     { value: '>=' },
@@ -62,6 +63,7 @@ export class DialogComponent implements OnInit {
     });
 
     if (data.edit){
+      this.title = "Edit";
       this.id = data.id;
       this.settingsService.getRule(this.id).subscribe((response) => {
         let rule = response.rule[0];
@@ -74,6 +76,7 @@ export class DialogComponent implements OnInit {
         this.edit = true;
       });
     } else {
+      this.title = "Add";
       this.chosenReponse = this.responses[0].value;
       this.chosenType = this.types[0].value;
       this.chosenValue = "0";

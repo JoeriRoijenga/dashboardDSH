@@ -17,9 +17,6 @@ export class GraphComponent implements AfterViewInit {
   public lastDateTime: string = "";
   public hide: boolean = false;
 
-  
-
-
   constructor(
     private graphsService: GraphsService,
   ) { }
@@ -73,14 +70,13 @@ export class GraphComponent implements AfterViewInit {
     this.graphsService.getSensorDataUpdate(this.chart.id, this.lastDateTime).subscribe( response => {
       if (response.sensor_data.length > 0) {
         for(const data in response.sensor_data){
-          if(response.sensor_data[data].id === 4){
-            this.dataPoints.push({x: Number(moment(response.sensor_data[data].datetime).format("x")),  y: Number(response.sensor_data[data].value)});
-          }      
+          this.dataPoints.push({x: Number(moment(response.sensor_data[data].datetime).format("x")),  y: Number(response.sensor_data[data].value)});
 
           if (Number(data) == (response.sensor_data.length - 1)) {
-            this.lastDateTime = response.sensor_data[data].datetime;      
+            this.lastDateTime = response.sensor_data[data].datetime;
           }
         }
+        
         chart.render();
       }
     });

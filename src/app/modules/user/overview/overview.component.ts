@@ -2,11 +2,7 @@ import { Component, OnInit, Inject, Input, Output, EventEmitter} from '@angular/
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig} from '@angular/material/dialog';
 import {DialogComponent} from './dialog/dialog.component';
 import { AuthService } from '../../../services/auth.service';
-import {stringify} from "querystring";
 import {EditDialogComponent} from "./edit-dialog/edit-dialog.component";
-import {newArray} from "@angular/compiler/src/util";
-
-// let dialogRef = dialog.open(UserprofileComponent, {height:'400px', width: '600px'});
 
 export interface DialogData {
   name: string;
@@ -19,7 +15,6 @@ export interface DialogData {
   templateUrl: './overview.component.html',
   styleUrls: ['./overview.component.scss']
 })
-
 export class OverviewComponent implements OnInit {
   title = 'User overview';
   name: string;

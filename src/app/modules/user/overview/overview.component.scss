@@ -1,28 +1,27 @@
 h1 {
   text-align: center;
 }
-
-td {
-  background: aliceblue;
-  padding: 10px 80px;
+table {
+  td {
+    background: aliceblue;
+    padding: 10px 80px;
+  }
+  
+  th {
+    background: #459cdd;
+    color: black;
+    padding: 5px;
+  }
 }
 
-th {
-  background: #459cdd;
-  color: black;
-  padding: 5px;
-
-}
-
-#table {
+.userTable {
   padding: 0 0;
   display: flex;
   justify-content: center;
   vertical-align: center;
-
+  overflow: scroll;
 }
 
-//button add user
 #buttons {
   display: flex;
   justify-content: center;
@@ -88,8 +87,51 @@ th {
   border: none;
   font-size: 20px;
   cursor: pointer;
-  //color: black;
 }
 .edit-button:hover{
   color: dimgrey;
 }
+
+.offset-left{
+  position: relative; 
+  left: 70px; 
+  width: 95%;
+}
+
+@media only screen and (max-width: 1366px) {
+  table {
+    width: 99%; 
+  }
+  .offset-left {
+    width: 94%;
+  }
+}
+
+@media only screen and (max-width: 1112px) {
+  table {
+    width: 99%; 
+  }
+  .offset-left {
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  table {
+    width: 99%; 
+  }
+  .offset-left {
+    width: 90%;
+  }
+}
+
+
+@media only screen and (max-width: 414px) {
+  table {
+    width: 99%; 
+  }
+  .offset-left {
+    width: 74%;
+  }
+}
+

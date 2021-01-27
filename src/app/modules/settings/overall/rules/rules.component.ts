@@ -47,7 +47,7 @@ export class RulesComponent implements OnInit {
 
     this.settingsService.getRules().subscribe(response => {
       for (let rule of response.rules) {
-        this.rules.push(
+        tempRules.push(
           {
             "id": rule.id,
             "sensor_name": rule.sensor_name,
