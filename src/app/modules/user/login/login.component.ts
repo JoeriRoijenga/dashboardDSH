@@ -31,8 +31,6 @@ export class LoginComponent implements OnInit {
       this.invalidLogin = true;
     }
 
-    // this.authService.create_user("test", "test2", "test@test.com", 1).subscribe();
-
     this.authService.login(String(this.loginForm.controls.mail.value).toLowerCase(), this.loginForm.controls.password.value).subscribe(
       response => {
         if (response) {
