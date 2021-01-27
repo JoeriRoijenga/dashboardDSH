@@ -77,20 +77,21 @@ table {
   font-size:20px;
   cursor: pointer;
 }
+
 .remove-button:hover{
   color: red;
 }
 
-.edit-button{
-  background: none;
-  display: flex;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-}
-.edit-button:hover{
-  color: dimgrey;
-}
+// .edit-button{
+//   background: none;
+//   display: flex;
+//   border: none;
+//   font-size: 20px;
+//   cursor: pointer;
+// }
+// .edit-button:hover{
+//   color: dimgrey;
+// }
 
 .offset-left{
   position: relative; 
