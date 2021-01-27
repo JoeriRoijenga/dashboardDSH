@@ -1,8 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
 import { AuthService } from '../../../../services/auth.service';
 
 interface AdminSelect{
@@ -11,7 +9,7 @@ interface AdminSelect{
 }
 
 @Component({
-  selector: 'app-dialog',
+  selector: 'app-edit-dialog',
   templateUrl: './edit-dialog.component.html',
   styleUrls: ['./edit-dialog.component.scss']
 })

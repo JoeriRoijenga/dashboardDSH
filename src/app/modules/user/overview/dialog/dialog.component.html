@@ -6,7 +6,7 @@
         <dt>
           <mat-form-field>
             <label>
-              <input   matInput type="text" placeholder="name" formControlName="name" [ngClass]="{ 'is-invalid': submitted && registerForm.errors }" />
+              <input matInput type="text" placeholder="name" formControlName="name" [ngClass]="{ 'is-invalid': submitted && registerForm.errors }" />
               <div *ngIf="submitted && error.name.errors" class="invalid-feedback">
                 <div *ngIf=" error.name.errors.required">name Name is required</div>
               </div>
@@ -16,7 +16,7 @@
         <dt>
           <mat-form-field>
             <label>
-              <input  matInput type="text" placeholder="email" formControlName="email" class="from-control" [ngClass]="{ 'is-invalid': submitted && registerForm.errors }" />
+              <input matInput type="text" placeholder="email" formControlName="email" class="from-control" [ngClass]="{ 'is-invalid': submitted && registerForm.errors }" />
               <div *ngIf="submitted && registerForm.errors" class="invalid-feedback">
                 <div *ngIf="error.email.errors.required">Email is required</div>
                 <div *ngIf="error.email.errors.email">Email must be a valid email address</div>
@@ -40,7 +40,7 @@
         <dt>
           <mat-form-field>
             <label>
-              <input   matInput type="password" placeholder="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && registerForm.errors }" />
+              <input matInput type="password" placeholder="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && registerForm.errors }" />
               <div *ngIf="submitted && registerForm.errors" class="invalid-feedback">
                 <div *ngIf="error.password.errors.required">Password is required</div>
                 <div *ngIf="error.password.errors.minlength">Password must be at least 6 characters</div>
