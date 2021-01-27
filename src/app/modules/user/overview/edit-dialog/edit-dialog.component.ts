@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../../services/auth.service';
 
 interface AdminSelect{
-  value: boolean,
+  value: number,
   viewValue: string,
 }
 
@@ -15,73 +15,63 @@ interface AdminSelect{
   templateUrl: './edit-dialog.component.html',
   styleUrls: ['./edit-dialog.component.scss']
 })
-
-
 export class EditDialogComponent implements OnInit{
-
-  public registerForm: FormGroup;
+  public editForm: FormGroup;
   public submitted = false;
-  public selected: boolean;
-  public ID: number;
-  get fu() {return this.registerForm.controls; }
+  public user: {};
+
+  get fu() {return this.editForm.controls; }
 
   adminrights: AdminSelect[] = [
-    {value: true, viewValue: 'admin rights'},
-    {value: false, viewValue: 'no admin rights'}
+    {value: 1, viewValue: 'Admin'},
+    {value: 0, viewValue: 'User'}
   ];
 
+  private id: number;
   public name: string;
   public mail: string;
-  public admin: boolean;
+  public admin: number;
 
   constructor(
-    private http: HttpClient,
-    private router: Router,
     private authService: AuthService,
     private dialogRef: MatDialogRef<EditDialogComponent>,
     private formbuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) data
   ) { 
     dialogRef.disableClose = false;
-    //@Inject(MAT_DIALOG_DATA) data: Userdata{any}){ dialogRef.disableClose = false;
-  }
+    this.id = data.id;
 
-  // changeRights(e){
-  //   this.adminrights.setValue(e.target.value,{onlySelf: true})
-  // }
-
-  ngOnInit(): void {
-
-    this.registerForm = this.formbuilder.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      admin: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(4)]],
-      confirmPassword: ['', Validators.required]
-    }, {
-      validators: MustMatch('password', 'confirmPassword')
+    this.authService.getUser(this.id).subscribe(response => {      
+      this.name = response.user[0].name;
+      this.mail = response.user[0].mail;
+      this.admin = Boolean(response.user[0].admin) == true ? this.adminrights[0].value : this.adminrights[1].value;
     });
   }
 
+  ngOnInit(): void {
+    this.editForm = this.formbuilder.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      admin: ['', Validators.required],
+    });
+  }
 
+  get error() {return this.editForm.controls; }
 
-  get error() {return this.registerForm.controls; }
-
-  save(): void{
+  save(): void{    
     this.submitted = true;
 
-    if (this.registerForm.invalid){
+    if (this.editForm.invalid){
       return;
     }
 
-    this.authService.updateUser( this.ID ,  this.registerForm.value.name, this.registerForm.value.email, Boolean(this.selected)).subscribe();
+    this.authService.updateUser(this.id, this.editForm.value.name, this.editForm.value.email, this.admin).subscribe();
     this.dialogRef.close();
   }
 
   close(): void{
     this.dialogRef.close();
   }
-
 }
 
 export function MustMatch(controlName: string, matchingControlName: string) {

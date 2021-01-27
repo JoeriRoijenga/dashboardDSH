@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../../services/auth.service';
 
 interface AdminSelect{
-  value: boolean,
+  value: number,
   viewValue: string,
 }
 
@@ -15,30 +15,25 @@ interface AdminSelect{
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss']
 })
-
-
 export class DialogComponent implements OnInit{
 
   public registerForm: FormGroup;
   public submitted = false;
-  public selected: boolean;
+  public selected: number;
   get fu() {return this.registerForm.controls; }
 
   adminrights: AdminSelect[]= [
-    {value: true, viewValue: 'admin rights'},
-    {value: false, viewValue: 'no admin rights'}
+    {value: 1, viewValue: 'Admin'},
+    {value: 0, viewValue: 'Normal'}
   ];
 
   constructor(
-    private http: HttpClient,
-    private router: Router,
     private authService: AuthService,
     private dialogRef: MatDialogRef<DialogComponent>,
     private formbuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) data
   ) {
     dialogRef.disableClose = false;
-    // console.log(data);
   }
 
   ngOnInit(): void {
@@ -53,8 +48,6 @@ export class DialogComponent implements OnInit{
     });
   }
 
-
-
   get error() {return this.registerForm.controls; }
 
   save(): void{
@@ -63,15 +56,13 @@ export class DialogComponent implements OnInit{
     if (this.registerForm.invalid){
       return;
     }
-
-    this.authService.create_user(this.registerForm.value.name, this.registerForm.value.password, this.registerForm.value.email, Boolean(this.selected)).subscribe();
+    
+    this.authService.create_user(this.registerForm.value.name, this.registerForm.value.password, this.registerForm.value.email, this.selected).subscribe();
     this.dialogRef.close();
   }
   close(): void{
     this.dialogRef.close();
   }
-
-
 }
 
 export function MustMatch(controlName: string, matchingControlName: string) {

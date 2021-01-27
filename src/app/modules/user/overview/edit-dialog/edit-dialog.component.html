@@ -1,33 +1,23 @@
-<h1 mat-dialog-title> edit user from system</h1>
+<h1 mat-dialog-title>Edit User</h1>
 <div class="jumbotron">
   <div class="container">
-    <form [formGroup]="registerForm">
+    <form [formGroup]="editForm">
       <dl>
         <dt>
           <mat-form-field>
             <label>
-              <input matInput type="text" placeholder="name" formControlName="name" [ngClass]="{ 'is-invalid': submitted && registerForm.errors }" value="{{name}}" />
-              <div *ngIf="submitted && error.lastName.errors" class="invalid-feedback">
+              <input matInput type="text" placeholder="name" formControlName="name" [(ngModel)]="name" [ngClass]="{ 'is-invalid': submitted && editForm.errors }"/>
+              <div *ngIf="submitted && error.name.errors" class="invalid-feedback">
                 <div *ngIf=" error.name.errors.required">Name is required</div>
               </div>
             </label>
           </mat-form-field>
         </dt>
-        <!-- <dt>
-          <mat-form-field>
-            <label>
-              <input  matInput type="text" placeholder="last name" formControlName="lastName"[ngClass]="{ 'is-invalid': submitted && registerForm.errors }" value="{{name}}" />
-              <div *ngIf="submitted && registerForm.errors" class="invalid-feedback">
-                <div *ngIf="error.lastName.errors.required">Last Name is required</div>
-              </div>
-            </label>
-          </mat-form-field>
-        </dt> -->
         <dt>
           <mat-form-field>
             <label>
-              <input  matInput type="text" placeholder="email" formControlName="email" class="from-control" [ngClass]="{ 'is-invalid': submitted && registerForm.errors }" value="{{mail}}" />
-              <div *ngIf="submitted && registerForm.errors" class="invalid-feedback">
+              <input  matInput type="text" placeholder="email" formControlName="email" class="from-control" [(ngModel)]="mail" [ngClass]="{ 'is-invalid': submitted && editForm.errors }" value="{{mail}}" />
+              <div *ngIf="submitted && editForm.errors" class="invalid-feedback">
                 <div *ngIf="error.email.errors.required">Email is required</div>
                 <div *ngIf="error.email.errors.email">Email must be a valid email address</div>
               </div>
@@ -36,43 +26,20 @@
         </dt>
         <dt>
           <mat-form-field>
-            <mat-label>admin rights?</mat-label>
-            <select matNativeControl required formControlName="admin" [(ngModel)]="selected" [ngClass]="{'is-invalid': submitted && registerForm.errors }" >
+            <mat-label>Rights</mat-label>
+            <select matNativeControl required formControlName="admin" [(ngModel)]="admin" [ngClass]="{'is-invalid': submitted && editForm.errors }" >
               <option *ngFor="let right of adminrights" [value]="right.value"  [selected]="right == admin" >
                 {{right.viewValue}}
               </option>
-              <div *ngIf="submitted && registerForm.errors" class="invalid-feedback">
+              <div *ngIf="submitted && editForm.errors" class="invalid-feedback">
                 <div *ngIf="error.admin.errors.required">Is required</div>
               </div>
             </select>
           </mat-form-field>
         </dt>
-<!--        <dt>-->
-<!--          <mat-form-field>-->
-<!--            <label>-->
-<!--              <input   matInput type="password" placeholder="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && registerForm.errors }" />-->
-<!--              <div *ngIf="submitted && registerForm.errors" class="invalid-feedback">-->
-<!--                <div *ngIf="error.password.errors.required">Password is required</div>-->
-<!--                <div *ngIf="error.password.errors.minlength">Password must be at least 6 characters</div>-->
-<!--              </div>-->
-<!--            </label>-->
-<!--          </mat-form-field>-->
-<!--        </dt>-->
-<!--        <dt>-->
-<!--          <mat-form-field>-->
-<!--            <label>-->
-<!--              <input matInput type="password" placeholder="repeat password" formControlName="confirmPassword"[ngClass]="{ 'is-invalid': submitted && registerForm.errors }" />-->
-<!--              <div *ngIf="submitted && registerForm.errors" class="invalid-feedback">-->
-<!--                <div *ngIf="error.confirmPassword.errors.required">Confirm Password is required</div>-->
-<!--                <div *ngIf="error.confirmPassword.errors.checkPWD">Passwords must match</div>-->
-<!--              </div>-->
-<!--            </label>-->
-<!--          </mat-form-field>-->
-<!--        </dt>-->
       </dl>
 
       <mat-dialog-actions>
-        <!--    <button class="close-button"(click)="close()">Close</button>-->
         <button class="save-button btn btn-primary"(click)="save()">Save</button>
       </mat-dialog-actions>
     </form>

@@ -20,10 +20,12 @@ export class AuthService {
     private router: Router,
   ) { }
 
-  public create_user(name: string, pwd: string, mail: string, admin: boolean): Observable<boolean> {
-    return this.http.post( `${environment.urlAPI}/users/create`, {name: name, pwd: pwd, mail: mail, admin: Number(admin)}).pipe(
+  public create_user(name: string, pwd: string, mail: string, admin: number): Observable<boolean> {
+    console.log(admin);
+    
+    return this.http.post( `${environment.urlAPI}/users/create`, {name: name, pwd: pwd, mail: mail, admin: admin}).pipe(
       mapTo(true),
-      catchError(error => {
+      catchError(() => {
         return of(false);
       })
     );
@@ -144,7 +146,7 @@ export class AuthService {
     return this.http.delete(`${environment.urlAPI}/users/delete/${id}`);
   }
 
-  public updateUser(id: number,name: string, mail:string, admin: boolean): Observable<any> {
+  public updateUser(id: number,name: string, mail:string, admin: number): Observable<any> {
     return this.http.put(`${environment.urlAPI}/users/update/${id}`, {name: name, mail: mail, admin: admin});
   }
 }

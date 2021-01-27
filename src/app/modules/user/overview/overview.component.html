@@ -1,13 +1,11 @@
 <h1>{{title}}</h1>
 
-<!--<input type="text" #newUser/>-->
-<!--<button>Add new user </button>-->
 <div class="userTable" id="table">
     <table>
       <tr>
         <th>Name</th>
         <th>Email</th>
-        <th>Admin rights</th>
+        <th>Admin</th>
         <th>Remove</th>
         <th>Edit</th>
       </tr>
@@ -15,8 +13,8 @@
         <td>{{user.name}}</td>
         <td>{{user.mail}}</td>
         <td>{{user.admin ? '&#10003;' : '&#10005;'}}</td>
-        <td><button class="remove-button"(click)="removeUser(user.id)"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
-        <td><button class="edit-button"(click)="editUser(user.id)"><i class="fa fa-pencil" aria-hidden="true"></i></button> </td>
+        <td><button class="remove-button" (click)="removeUser(user.id)"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+        <td><button class="edit-button" (click)="editUser(user.id)"><i class="fa fa-pencil" aria-hidden="true"></i></button> </td>
       </tr>
 
   </table>
@@ -24,9 +22,4 @@
 
 <div id="buttons">
   <button class="button" (click)="openAddUser()"><span>add user</span></button>
-<!--  //<button class="remove-button"(click)="removeUser()"><span>remove</span></button>-->
 </div>
-
-
-
-

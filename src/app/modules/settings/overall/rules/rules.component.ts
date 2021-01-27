@@ -1,3 +1,4 @@
+import { templateSourceUrl } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EditDialogComponent } from 'src/app/modules/user/overview/edit-dialog/edit-dialog.component';
@@ -42,8 +43,9 @@ export class RulesComponent implements OnInit {
   }
 
   getRules() {
+    let tempRules = [];
+
     this.settingsService.getRules().subscribe(response => {
-      this.rules = [];
       for (let rule of response.rules) {
         this.rules.push(
           {
@@ -56,6 +58,8 @@ export class RulesComponent implements OnInit {
           }
         );
       }
+
+      this.rules = tempRules;
     });
   }
 
