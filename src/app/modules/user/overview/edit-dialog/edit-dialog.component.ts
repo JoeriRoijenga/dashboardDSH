@@ -65,7 +65,7 @@ export class EditDialogComponent implements OnInit{
       return;
     }
 
-    this.authService.updateUser(this.id, this.editForm.value.name, this.editForm.value.email, this.admin).subscribe();
+    this.authService.updateUser(this.id, this.editForm.value.name, String(this.editForm.value.email).toLowerCase(), this.admin).subscribe();
     this.dialogRef.close();
   }
 

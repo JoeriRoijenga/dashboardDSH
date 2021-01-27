@@ -57,7 +57,7 @@ export class DialogComponent implements OnInit{
       return;
     }
     
-    this.authService.create_user(this.registerForm.value.name, this.registerForm.value.password, this.registerForm.value.email, this.selected).subscribe();
+    this.authService.create_user(this.registerForm.value.name, this.registerForm.value.password, String(this.registerForm.value.email).toLowerCase(), this.selected).subscribe();
     this.dialogRef.close();
   }
   close(): void{

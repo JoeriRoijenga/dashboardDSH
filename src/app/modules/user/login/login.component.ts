@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
       this.invalidLogin = true;
     }
 
-    this.authService.login(this.loginForm.controls.mail.value, this.loginForm.controls.password.value).subscribe(
+    this.authService.login(String(this.loginForm.controls.mail.value).toLowerCase(), this.loginForm.controls.password.value).subscribe(
       response => {
         if (response) {
           this.router.navigate(['/admin']);
@@ -41,5 +41,4 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-
 }
