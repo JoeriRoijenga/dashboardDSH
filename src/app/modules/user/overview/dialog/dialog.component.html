@@ -43,7 +43,7 @@
               <input matInput type="password" placeholder="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && registerForm.errors }" />
               <div *ngIf="submitted && registerForm.errors" class="invalid-feedback">
                 <div *ngIf="error.password.errors.required">Password is required</div>
-                <div *ngIf="error.password.errors.minlength">Password must be at least 6 characters</div>
+                <div *ngIf="error.password.errors.minlength">Password must be at least 4 characters</div>
               </div>
             </label>
           </mat-form-field>

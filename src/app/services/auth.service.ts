@@ -135,6 +135,11 @@ export class AuthService {
     return true;
   }
 
+  public getIdFromToken() {
+    const jwtToken = JSON.parse(atob(localStorage.getItem(this.ACCESS_TOKEN).split('.')[1]));
+    return jwtToken.identity.id;
+  }
+
   public getUsers(): Observable<any> {
     return this.http.get(`${environment.urlAPI}/users/get/all`);
   }
@@ -148,5 +153,9 @@ export class AuthService {
 
   public updateUser(id: number,name: string, mail:string, admin: number): Observable<any> {
     return this.http.put(`${environment.urlAPI}/users/update/${id}`, {name: name, mail: mail, admin: admin});
+  }
+
+  public updateSelf(id: number,name: string, mail:string, admin: number, pwd: string): Observable<any> {
+    return this.http.put(`${environment.urlAPI}/users/update/${id}`, {name: name, mail: mail, admin: admin, pwd: pwd});
   }
 }

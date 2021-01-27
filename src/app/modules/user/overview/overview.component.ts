@@ -70,7 +70,6 @@ export class OverviewComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    console.log(id);
     
     dialogConfig.data = {
       id: id

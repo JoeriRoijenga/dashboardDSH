@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AuthService } from 'src/app/services/auth.service';
+import { EditDialogComponent } from '../../user/overview/edit-dialog/edit-dialog.component';
 
 @Component({
   selector: 'app-menu',
@@ -11,7 +13,8 @@ export class MenuComponent implements OnInit {
   loggedInUrl: string = "";
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private dialog: MatDialog,
   ) {
     this.loggedIn = "Logout";
     this.loggedInUrl = "logout"
@@ -22,4 +25,19 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit(): void { }
+
+  editUser(): void{
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    console.log();
+    
+    dialogConfig.data = {
+      id: this.authService.getIdFromToken()
+    };
+
+    const dialogRef = this.dialog.open(EditDialogComponent, dialogConfig);
+    
+    dialogRef.afterClosed().subscribe();
+  }
 }

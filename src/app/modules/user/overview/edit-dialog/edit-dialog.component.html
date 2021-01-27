@@ -37,6 +37,38 @@
             </select>
           </mat-form-field>
         </dt>
+        <dt *ngIf="selfEdit">
+          <mat-form-field>
+            <label>
+              <input matInput type="password" placeholder="current password" formControlName="currentPassword" [ngClass]="{ 'is-invalid': submitted && editForm.errors }" />
+              <div *ngIf="submitted && editForm.errors" class="invalid-feedback">
+                <div *ngIf="error.password.errors.required">Password is required</div>
+              </div>
+            </label>
+          </mat-form-field>
+        </dt>
+        <dt *ngIf="selfEdit">
+          <mat-form-field>
+            <label>
+              <input matInput type="password" placeholder="new password" formControlName="newPassword" [ngClass]="{ 'is-invalid': submitted && editForm.errors }" />
+              <div *ngIf="submitted && editForm.errors" class="invalid-feedback">
+                <div *ngIf="error.password.errors.required">Password is required</div>
+                <div *ngIf="error.password.errors.minlength">Password must be at least 4 characters</div>
+              </div>
+            </label>
+          </mat-form-field>
+        </dt>
+        <dt *ngIf="selfEdit">
+          <mat-form-field>
+            <label>
+              <input matInput type="password" placeholder="repeat password" formControlName="confirmPassword"[ngClass]="{ 'is-invalid': submitted && editForm.errors }" />
+              <div *ngIf="submitted && editForm.errors" class="invalid-feedback">
+                <div *ngIf="error.confirmPassword.errors.required">Confirm Password is required</div>
+                <div *ngIf="error.confirmPassword.errors.checkPWD">Passwords must match</div>
+              </div>
+            </label>
+          </mat-form-field>
+        </dt>
       </dl>
 
       <mat-dialog-actions>
