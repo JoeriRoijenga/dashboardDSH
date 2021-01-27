@@ -58,10 +58,8 @@ export class EditDialogComponent implements OnInit{
         email: ['', [Validators.required, Validators.email]],
         admin: ['', Validators.required],
         currentPassword: ['', [Validators.required]],
-        newPassword: ['', [Validators.required, Validators.minLength(4)]],
-        confirmPassword: ['', Validators.required]
-      }, {
-        validators: MustMatch('newpassword', 'confirmPassword')
+        newPassword: ['', [Validators.minLength(4)]],
+        confirmPassword: ['', [Validators.minLength(4)]]
       });
     } else {
       this.editForm = this.formbuilder.group({
@@ -86,9 +84,19 @@ export class EditDialogComponent implements OnInit{
     if (this.selfEdit) {
       this.authService.login(String(this.editForm.value.email).toLowerCase(), this.editForm.value.currentPassword).subscribe(response => {        
         if (response) {
-          this.authService.updateSelf(this.id, this.editForm.value.name, String(this.editForm.value.email).toLowerCase(), this.admin, this.editForm.value.newPassword).subscribe(() => {
-            this.close();
-          });
+          if (this.editForm.value.newPassword == "") {
+            this.authService.updateUser(this.id, this.editForm.value.name, String(this.editForm.value.email).toLowerCase(), this.admin).subscribe(() => {
+              this.close();
+            });
+          } else {
+            if (this.editForm.value.newPassword == this.editForm.value.confirmPassword) {
+              this.authService.updateSelf(this.id, this.editForm.value.name, String(this.editForm.value.email).toLowerCase(), this.admin, this.editForm.value.newPassword).subscribe(() => {
+                this.close();
+              });
+            } else {
+              this.editForm.controls["confirmPassword"].setErrors({ mustMatch: true });
+            }
+          }
         }
       })
     } else {
@@ -110,21 +118,21 @@ export class EditDialogComponent implements OnInit{
   }
 }
 
-export function MustMatch(controlName: string, matchingControlName: string) {
-  return (formGroup: FormGroup) => {
-    const control = formGroup.controls[controlName];
-    const matchingControl = formGroup.controls[matchingControlName];
+// export function MustMatch(controlName: string, matchingControlName: string) {
+//   return (formGroup: FormGroup) => {
+//     const control = formGroup.controls[controlName];
+//     const matchingControl = formGroup.controls[matchingControlName];
 
-    if (matchingControl.errors && !matchingControl.errors.mustMatch) {
-      // return if another validator has already found an error on the matchingControl
-      return;
-    }
+//     if (matchingControl.errors && !matchingControl.errors.mustMatch) {
+//       // return if another validator has already found an error on the matchingControl
+//       return;
+//     }
 
-    // set error on matchingControl if validation fails
-    if (control.value !== matchingControl.value) {
-      matchingControl.setErrors({ mustMatch: true });
-    } else {
-      matchingControl.setErrors(null);
-    }
-  };
-}
+//     // set error on matchingControl if validation fails
+//     if (control.value !== matchingControl.value) {
+//       matchingControl.setErrors({ mustMatch: true });
+//     } else {
+//       matchingControl.setErrors(null);
+//     }
+//   };
+// }

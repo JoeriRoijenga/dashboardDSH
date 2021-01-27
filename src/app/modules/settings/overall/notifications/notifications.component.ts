@@ -48,7 +48,6 @@ export class NotificationsComponent implements OnInit {
       }
     ).subscribe(
       response => {
-        console.log(response);
         this.btnSave = "Saved!"
 
         setTimeout(() => {

@@ -30,7 +30,6 @@ export class MenuComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    console.log();
     
     dialogConfig.data = {
       id: this.authService.getIdFromToken()
