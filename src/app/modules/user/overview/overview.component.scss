@@ -19,7 +19,7 @@ table {
   display: flex;
   justify-content: center;
   vertical-align: center;
-  overflow: scroll;
+  overflow: hidden;
 }
 
 #buttons {
@@ -70,29 +70,6 @@ table {
   right: 0;
 }
 
-.remove-button {
-  background: none;
-  display: flex;
-  border: none;
-  font-size:20px;
-  cursor: pointer;
-}
-
-.remove-button:hover{
-  color: red;
-}
-
-// .edit-button{
-//   background: none;
-//   display: flex;
-//   border: none;
-//   font-size: 20px;
-//   cursor: pointer;
-// }
-// .edit-button:hover{
-//   color: dimgrey;
-// }
-
 .offset-left{
   position: relative; 
   left: 70px; 
@@ -126,6 +103,17 @@ table {
   }
 }
 
+@media only screen and (max-width: 730px) {
+  table {
+    width: 99%; 
+  }
+  .offset-left {
+    width: 90%;
+  }
+  .userTable {
+    overflow: scroll;
+  }
+}
 
 @media only screen and (max-width: 414px) {
   table {
@@ -133,6 +121,9 @@ table {
   }
   .offset-left {
     width: 74%;
+  }
+  .userTable {
+    overflow: scroll;
   }
 }
 
