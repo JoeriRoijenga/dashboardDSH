@@ -1,8 +1,8 @@
-import { Component, OnInit, Inject, Input, Output, EventEmitter} from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig} from '@angular/material/dialog';
-import {DialogComponent} from './dialog/dialog.component';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { DialogComponent } from './dialog/dialog.component';
 import { AuthService } from '../../../services/auth.service';
-import {EditDialogComponent} from "./edit-dialog/edit-dialog.component";
+import { EditDialogComponent } from "./edit-dialog/edit-dialog.component";
 
 export interface DialogData {
   name: string;

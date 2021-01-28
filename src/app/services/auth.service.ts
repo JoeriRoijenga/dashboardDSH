@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-
 export class AuthService {
 
   private readonly ACCESS_TOKEN = 'access_token';

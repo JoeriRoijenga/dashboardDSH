@@ -1,14 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { GraphsService } from "../../services/graphs.service";
 
-
 @Component({
   selector: 'app-graphs',
   templateUrl: './graphs.component.html',
   styleUrls: ['./graphs.component.scss']
 })
-
-
 export class GraphsComponent implements OnInit {
   public charts = [];
 
