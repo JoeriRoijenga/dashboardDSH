@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import * as moment from 'moment';
+import { AuthService } from 'src/app/services/auth.service.js';
 import { GraphsService } from 'src/app/services/graphs.service';
 import * as CanvasJS from "./canvasjs.min.js";
 
@@ -21,6 +22,7 @@ export class GraphComponent implements AfterViewInit {
 
   constructor(
     private graphsService: GraphsService,
+    private authService: AuthService
   ) { }
 
   ngAfterViewInit(): void {
@@ -63,6 +65,8 @@ export class GraphComponent implements AfterViewInit {
       }
     });
 
+    clearInterval(this.interval);
+    
     this.interval = setInterval(() => {
       if (!this.updateChart(chart)) {
         clearInterval(this.interval);
@@ -70,12 +74,8 @@ export class GraphComponent implements AfterViewInit {
     }, 5000);
   }
 
-  updateChart(chart): boolean{
-    this.graphsService.getSensorDataUpdate(this.chart.id, this.lastDateTime).subscribe(response => {
-      if (response == false) {
-        return false;
-      }
-      
+  updateChart(chart): boolean | void {
+    this.graphsService.getSensorDataUpdate(this.chart.id, this.lastDateTime).subscribe(response => {            
       if (response.sensor_data.length > 0) {
         for(const data in response.sensor_data){
           this.dataPoints.push({x: Number(moment(response.sensor_data[data].datetime).format("x")),  y: Number(response.sensor_data[data].value)});
@@ -87,10 +87,11 @@ export class GraphComponent implements AfterViewInit {
         
         chart.render();
       }
-      
-      return true;
     });
 
+    if (this.authService.isLoggedIn()) {
+      return true;
+    }
     return false;
   }
 }
