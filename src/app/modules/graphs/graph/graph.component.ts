@@ -17,6 +17,8 @@ export class GraphComponent implements AfterViewInit {
   public lastDateTime: string = "";
   public hide: boolean = false;
 
+  private interval;
+
   constructor(
     private graphsService: GraphsService,
   ) { }
@@ -61,13 +63,19 @@ export class GraphComponent implements AfterViewInit {
       }
     });
 
-    setInterval(() => {
-      this.updateChart(chart);
-    }, 5000);   
+    this.interval = setInterval(() => {
+      if (!this.updateChart(chart)) {
+        clearInterval(this.interval);
+      }
+    }, 5000);
   }
 
-  updateChart(chart): void{
-    this.graphsService.getSensorDataUpdate(this.chart.id, this.lastDateTime).subscribe( response => {
+  updateChart(chart): boolean{
+    this.graphsService.getSensorDataUpdate(this.chart.id, this.lastDateTime).subscribe(response => {
+      if (response == false) {
+        return false;
+      }
+      
       if (response.sensor_data.length > 0) {
         for(const data in response.sensor_data){
           this.dataPoints.push({x: Number(moment(response.sensor_data[data].datetime).format("x")),  y: Number(response.sensor_data[data].value)});
@@ -79,7 +87,10 @@ export class GraphComponent implements AfterViewInit {
         
         chart.render();
       }
+      
+      return true;
     });
-  }
 
+    return false;
+  }
 }
