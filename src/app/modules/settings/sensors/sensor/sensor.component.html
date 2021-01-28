@@ -3,14 +3,14 @@
   <div class="notification-settings">
     <label class="notification-options">Notifications</label>
     <label class="switch">
-      <input #notificationsid id="notifications" type="checkbox" [checked]="notification" (change)="changeSetting(notificationsid)">
+      <input #notificationsid id="notifications" type="checkbox" [checked]="notification" (change)="changeSetting(notificationsid)" [disabled]="true">
       <span class="slider"></span>
     </label>
   </div>
   <div class="notification-settings">
     <label class="notification-options">SMS</label>
     <label class="switch">
-      <input #smsid id="sms" type="checkbox" [checked]="sms" (change)="changeSetting(smsid)">
+      <input #smsid id="sms" type="checkbox" [checked]="sms" (change)="changeSetting(smsid)" [disabled]="true">
       <span class="slider"></span>
     </label>
   </div>

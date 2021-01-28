@@ -133,13 +133,21 @@ export class AuthService {
   }
 
   public getIdFromToken() {
-    const jwtToken = JSON.parse(atob(localStorage.getItem(this.ACCESS_TOKEN).split('.')[1]));
-    return jwtToken.identity.id;
+    const jwtToken = localStorage.getItem(this.ACCESS_TOKEN);
+    
+    if (jwtToken !==  null) {
+      return JSON.parse(atob(jwtToken.split('.')[1])).identity.id;
+    }
+    return false;
   }
 
   public getRightsFromToken() {
-    const jwtToken = JSON.parse(atob(localStorage.getItem(this.ACCESS_TOKEN).split('.')[1]));
-    return Boolean(jwtToken.identity.admin);
+    const jwtToken = localStorage.getItem(this.ACCESS_TOKEN);
+    
+    if (jwtToken !==  null) {
+      return Boolean(JSON.parse(atob(jwtToken.split('.')[1])).identity.admin);
+    }
+    return false;
   }
 
   public getUsers(): Observable<any> {
