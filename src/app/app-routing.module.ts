@@ -8,6 +8,7 @@ import { LogoutComponent } from './modules/user/logout/logout.component';
 import { SettingsComponent } from './modules/settings/settings.component';
 import { HomeComponent } from './modules/home/home.component';
 import { GraphsComponent } from "./modules/graphs/graphs.component";
+import { AdminGuard } from './services/guards/admin.guard';
 
 const routes: Routes = [
   { path: '', canActivate: [NotLoggedInGuard], children: [
@@ -17,8 +18,8 @@ const routes: Routes = [
   },
 
   { path: '', canActivate: [LoggedInGuard], children: [
-      { path: 'admin', component: OverviewComponent },
-      { path: 'settings', component: SettingsComponent },
+      { path: 'admin', canActivate: [AdminGuard], component: OverviewComponent },
+      { path: 'settings', canActivate: [AdminGuard], component: SettingsComponent },
       { path: 'graphs', component: GraphsComponent },
       { path: 'logout', component: LogoutComponent },
     ]

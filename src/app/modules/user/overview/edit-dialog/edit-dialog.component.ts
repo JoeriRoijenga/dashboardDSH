@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../../services/auth.service';
 
 interface AdminSelect{
@@ -30,6 +30,8 @@ export class EditDialogComponent implements OnInit{
   public name: string;
   public mail: string;
   public admin: number;
+  
+  public rights: boolean;
 
   constructor(
     private authService: AuthService,
@@ -39,6 +41,7 @@ export class EditDialogComponent implements OnInit{
   ) { 
     dialogRef.disableClose = false;
     this.id = data.id;
+    this.rights = this.authService.getRightsFromToken();
 
     if (this.id === Number(this.authService.getIdFromToken())) {
       this.selfEdit = true;
@@ -56,11 +59,14 @@ export class EditDialogComponent implements OnInit{
       this.editForm = this.formbuilder.group({
         name: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
-        admin: ['', Validators.required],
         currentPassword: ['', [Validators.required]],
         newPassword: ['', [Validators.minLength(4)]],
         confirmPassword: ['', [Validators.minLength(4)]]
       });
+
+      if (this.rights) {
+        this.editForm.addControl('admin', new FormControl('', Validators.required));
+      }
     } else {
       this.editForm = this.formbuilder.group({
         name: ['', Validators.required],

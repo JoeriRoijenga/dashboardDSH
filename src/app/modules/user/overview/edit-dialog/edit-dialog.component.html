@@ -24,7 +24,7 @@
             </label>
           </mat-form-field>
         </dt>
-        <dt>
+        <dt *ngIf="rights">
           <mat-form-field>
             <mat-label>Rights</mat-label>
             <select matNativeControl required formControlName="admin" [(ngModel)]="admin" [ngClass]="{'is-invalid': submitted && editForm.errors }" >

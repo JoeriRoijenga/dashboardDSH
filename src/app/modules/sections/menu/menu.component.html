@@ -9,13 +9,13 @@
         <span class="title">Overview</span>
       </a>
     </li>
-    <li>
+    <li *ngIf="rights">
       <a routerLink="settings">
         <span class="icon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
         <span class="title">Config</span>
       </a>
     </li>
-    <li>
+    <li *ngIf="rights">
       <a routerLink="admin">
         <span class="icon"><i class="fa fa-users" aria-hidden="true"></i></span>
         <span class="title">User</span>

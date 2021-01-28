@@ -138,6 +138,11 @@ export class AuthService {
     return jwtToken.identity.id;
   }
 
+  public getRightsFromToken() {
+    const jwtToken = JSON.parse(atob(localStorage.getItem(this.ACCESS_TOKEN).split('.')[1]));
+    return Boolean(jwtToken.identity.admin);
+  }
+
   public getUsers(): Observable<any> {
     return this.http.get(`${environment.urlAPI}/users/get/all`);
   }

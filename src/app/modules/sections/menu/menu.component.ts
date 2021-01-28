@@ -11,6 +11,7 @@ import { EditDialogComponent } from '../../user/overview/edit-dialog/edit-dialog
 export class MenuComponent implements OnInit {
   loggedIn: string = "";
   loggedInUrl: string = "";
+  rights: boolean;
 
   constructor(
     private authService: AuthService,
@@ -22,6 +23,8 @@ export class MenuComponent implements OnInit {
       this.loggedIn = "Login";
       this.loggedInUrl = "login"
     }
+
+    this.rights = this.authService.getRightsFromToken();
   }
 
   ngOnInit(): void { }
